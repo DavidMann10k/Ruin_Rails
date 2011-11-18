@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RR</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+	<head>
+	  <title><%= title %></title>
+	  <%= render "layouts/stylesheets"%>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tag %>
+	</head>
+	<body>
+		<%= render 'layouts/scheme'%>
+		<%= render 'layouts/links'%>
+		<%= render 'layouts/header' %>
+		<div class="container">
+	        <% flash.each do |key, value| %>
+	            <div class="flash <%= key %> round"><%= value %></div>
+	        <% end %>
+			<section>
+				<h1>/<%= @title %></h1>
+			    <%= yield %>
+			</section>
+			<%= render 'layouts/footer' %>
+			<%= debug(params) if Rails.env.development? %>
+		</div>
+	</body>
 </html>

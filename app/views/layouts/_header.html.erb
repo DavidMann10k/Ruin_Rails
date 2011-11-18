@@ -1,0 +1,15 @@
+<header>
+	<h1 class="logo"><%= link_to logo, root_path %></h1>
+	<nav class="top">
+		<ul class="round">
+			<% if signed_in? %>
+			   <li><%= current_user.email %></li>
+			   <li><%= link_to "Settings", services_path %></li>
+			   <li><%= link_to "Sign out", signout_services_path %></li>
+			<% else %>
+			    <li><%= link_to "Sign In / Register", signin_path %></li>
+			<% end %>
+		</ul>
+	</nav>
+	
+</header>

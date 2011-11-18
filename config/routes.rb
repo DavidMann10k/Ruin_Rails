@@ -1,4 +1,12 @@
 RR::Application.routes.draw do
+  
+  root :to => 'pages#root'
+  
+  match "/signin", :to => "pages#root"
+  match "/about", :to => "pages#about"
+  match "/about_ruin_rails", :to => "pages#about_ruin_rails"
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
