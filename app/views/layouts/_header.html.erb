@@ -4,10 +4,10 @@
 		<ul class="round">
 			<% if signed_in? %>
 			   <li><%= current_user.email %></li>
-			   <li><%= link_to "Settings", services_path %></li>
-			   <li><%= link_to "Sign out", signout_services_path %></li>
+			   <li><%= link_to "Profile", :action => "show", :controller => "users", :id => current_user.id %></li>
+			   <li><%= link_to "Sign out", "/signout" %></li>
 			<% else %>
-			    <li><%= link_to "Sign In / Register", signin_path %></li>
+			    <li><%= link_to "Sign In / Register", "/authenticate" %></li>
 			<% end %>
 		</ul>
 	</nav>

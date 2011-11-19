@@ -1,11 +1,29 @@
 RR::Application.routes.draw do
+    
+  get "users/new"
+
+  get "authentications/create"
+
+  get "authentications/new"
+
+  get "authentications/destroy"
+
+  get "authentications/failure"
+
+  resources :users
+  resources :authentications, :only => [:index, :create, :destroy]
   
   root :to => 'pages#root'
   
-  match "/signin", :to => "pages#root"
-  match "/about", :to => "pages#about"
-  match "/about_ruin_rails", :to => "pages#about_ruin_rails"
+  match '/auth/:service/callback', :to => 'authentications#auth_callback' 
+  match '/auth/failure',           :to => 'authentications#failure'  
+  match "/authenticate",           :to => "authentications#authenticate"
+  match "/signout",                :to => "authentications#signout"
   
+  match "/register",         :to => "users#new"
+  match "/signin",           :to => "pages#sign_in"
+  match "/about",            :to => "pages#about"
+  match "/about_ruin_rails", :to => "pages#about_ruin_rails"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

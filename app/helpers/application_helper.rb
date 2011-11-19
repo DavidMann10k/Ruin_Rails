@@ -4,10 +4,6 @@ module ApplicationHelper
     "ruin_rails"
   end
   
-  def signed_in?
-    #TEMPORARY
-  end
-  
   def title
     base_title = "ruin_rails"
     if @title.nil?
