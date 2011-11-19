@@ -1,11 +1,11 @@
 module ApplicationHelper
   
   def logo
-    "ruin_rails"
+    "Ruin_Rails"
   end
   
   def title
-    base_title = "ruin_rails"
+    base_title = "Ruin_Rails"
     if @title.nil?
       base_title
     else

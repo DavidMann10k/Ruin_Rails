@@ -1,0 +1,38 @@
+body {
+  font-family:'Open Sans', sans-serif;
+}
+h1 {
+  text-align:right;
+  font-family:'Atomic Age', sans-serif;
+  font-size:3em;
+  color:$ClrTextRed;
+}
+h2 {
+  text-align:center;
+  font-family:'Contrail One', sans-serif;
+  color:$ClrTextRed;
+  margin:10px;
+}
+h3 {
+  font-family:'Contrail One', sans-serif;
+  color:$ClrTextRed;
+}
+h6 {
+  text-align:center;
+  color:$ClrGre4;
+}
+a {
+  color:$ClrLinkBlu;
+    text-decoration: none;
+    &:hover{
+       text-decoration: underline;
+       color:$ClrLinkBlu;
+    }
+    &:visited{
+      text-decoration: none;
+      color:$ClrLinkBlu;
+    }
+}
+p {
+  font-size:1.1em;
+}

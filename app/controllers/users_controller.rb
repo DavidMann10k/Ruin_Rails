@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
   before_filter :not_signed_in, :only => [:new, :create]
   
+  def index
+    @title = "users"
+  end
+  
   def new
-    @title = "Register"
+    @title = "register"
     @user = User.new
     @user.name = params[:name]
     @user.email = params[:email]
@@ -44,6 +48,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @title = User.find_by_id(params[:id]).name
+    @title = User.find_by_id(params[:id]).name.downcase
   end
 end

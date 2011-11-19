@@ -7,7 +7,6 @@
 	  <%= csrf_meta_tag %>
 	</head>
 	<body>
-		<%= render 'layouts/scheme'%>
 		<%= render 'layouts/links'%>
 		<%= render 'layouts/header' %>
 		<div class="container">
@@ -19,7 +18,7 @@
 			    <%= yield %>
 			</section>
 			<%= render 'layouts/footer' %>
-			<%= debug(params) if Rails.env.development? %>
+			<%= render "layouts/testing" if Rails.env.development? and false %>
 		</div>
 	</body>
 </html>
