@@ -1,14 +1,4 @@
 RR::Application.routes.draw do
-    
-  get "users/new"
-
-  get "authentications/create"
-
-  get "authentications/new"
-
-  get "authentications/destroy"
-
-  get "authentications/failure"
 
   resources :users
   resources :authentications, :only => [:index, :create, :destroy]

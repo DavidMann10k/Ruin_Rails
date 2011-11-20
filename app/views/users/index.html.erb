@@ -1,5 +1,8 @@
-<%= User.all.each do |u| %>
-	<ul>
-		<li><%= u.id %> <%= u.name %></li>
-	</ul>
-<% end %>
+<table>
+	<% User.all.each do |u| %>
+		<tr>
+			<td class="small"><%= u.id %></td>
+			<td><%= link_to u.name, :action => "show", :controller => "users", :id => u.id %></td>
+		</tr>
+	<% end %>
+</table>

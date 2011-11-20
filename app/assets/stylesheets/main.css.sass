@@ -1,0 +1,59 @@
+@mixin round($radius: 5px)
+  -moz-border-radius:    $radius
+  -webkit-border-radius: $radius
+  border-radius:         $radius
+
+body
+  background: $gre_1
+  
+.container
+  width: auto
+  margin: 20px
+
+header
+  border-top: solid 3px $clr_3
+  background: $clr_2
+  border-bottom: solid 3px $clr_1
+    
+  margin-top: 10px
+  padding: 7px
+  h1
+    text-align: left
+    display: inline
+  a#logo
+    color: $gre_2
+  nav
+    float: right
+    ul
+      margin: 10px      
+      li
+        display: inline
+    a
+      background: $link_alt
+      color: $link
+      
+      padding: 5px
+      margin: 5px
+      @include round
+      &:hover
+        background: $link
+        color: $link_alt  
+
+  
+  
+  
+section
+  border-width: 4px
+  border-color: $gre_2
+  border-style: groove hidden groove hidden
+  
+  padding: 20px  
+  margin-top: 10px
+  @include round(30px)
+  
+footer
+  padding: 20px
+  text-align: center
+  border-bottom: 4px groove $gre_2
+  @include round(30px)
+  
