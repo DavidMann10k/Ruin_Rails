@@ -6,6 +6,7 @@
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tag %>
 	</head>
+	signed_in?: <%= signed_in? %>, current_user: <%= current_user%> 
 	<body>
 		<%= render 'layouts/scheme'%>
 		<%= render 'layouts/header' %>

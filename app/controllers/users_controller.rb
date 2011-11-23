@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
   def not_signed_in
     unless !signed_in?
       flash[:error] = "You are already authenticated and registered!  Log out if you wish to register another acount."
@@ -48,6 +52,8 @@ class UsersController < ApplicationController
   end
   
   def show
-    @title = User.find_by_id(params[:id]).name.downcase
+    @user = User.find(params[:id])
+    @title = User.find(params[:id]).name.downcase
   end
+  
 end

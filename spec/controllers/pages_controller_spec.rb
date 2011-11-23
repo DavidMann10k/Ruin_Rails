@@ -23,7 +23,7 @@ describe PagesController do
     describe "correct title for" do
       
       before(:each) do
-        @base_title = "ruin_rails"
+        @base_title = "Ruin_Rails"
       end
         
       it "root" do

@@ -1,14 +1,14 @@
 FactoryGirl.define do
-  
+        
   factory :user do
-    name  'David'
-    email 'davidmann10k@gmail.com'
+    sequence(:name) { |n| "user #{n}" }
+    sequence(:email) { |n| "user#{n}@email.com" }
     admin false
   end
   
   factory :admin, :class => User do
-    name  'David'
-    email 'davidmann10k@gmail.com'
+    sequence(:name) {|n| "Admin User #{n}" }
+    sequence(:email) {|n| "admin#{n}@user.com" }
     admin true
   end
 end

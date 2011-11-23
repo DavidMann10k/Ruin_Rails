@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe UsersController do
   render_views
-
+  
+ # user = FactoryGirl.create(:user)
+=begin
   describe "should find" do
     it "new" do
       get 'new'
@@ -13,15 +15,18 @@ describe UsersController do
       response.should be_success
     end
     it "show" do
-      user = FactoryGirl.build(:user)
-      get 'index', :id => 1
+      get 'show', :id => @user.id
+      response.should be_success
+    end
+    it "edit" do
+      get 'edit', :id => @user.id
       response.should be_success
     end
     
     describe "correct title for" do
       
       before(:each) do
-        @base_title = "ruin_rails"
+        @base_title = "Ruin_Rails"
       end
       
       it "new" do
@@ -35,10 +40,18 @@ describe UsersController do
       end
       
       it "show" do
-        user = FactoryGirl.create(:user)
-        get :show, :id => 1
-        response.should have_selector("title", :content => "#{@base_title}/#{user.name.downcase}") 
+        get :show, :id => @user.id
+        response.should have_selector("title", :content => "#{@base_title}/#{@user.name.downcase}") 
       end
     end
-  end 
+  end
+  
+  describe "show" do
+    
+    it "should have an edit button for current user" do
+      session[:user_id] = @user.id
+      get :show, id => @user.id
+      response.should have_selector("a", :content => "Edit Details")
+    end
+=end
 end

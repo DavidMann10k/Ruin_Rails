@@ -24,16 +24,15 @@ end
 
 
 group :development do
-  gem 'mongrel', '1.2.0.pre2'
   gem 'rspec-rails'
   gem 'sqlite3'
-  gem "factory_girl_rails"
+  gem "factory_girl_rails", "~> 1.2"
 end
 
 group :test do
   gem 'rspec-rails'
   gem 'webrat'
   gem 'spork', '0.9.0.rc5'
-  gem "factory_girl_rails"
+  gem "factory_girl_rails", "~> 1.2"
   gem 'sqlite3'
 end
