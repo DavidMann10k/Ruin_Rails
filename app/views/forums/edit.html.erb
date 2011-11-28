@@ -1,0 +1,16 @@
+<%= link_to "Forums", divisions_path %>
+<%= form_for(@forum) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<div class="field">
+		<%= f.label :title %><br />
+		<%= f.text_field :title, :autofocus => true %>
+	</div>
+	<div class="field">
+		<%= f.label "Division ID" %><br />
+		<%= f.text_field :division_id %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Confirm Editions" %>
+		<%= f.submit "Cancel" %>
+	</div>
+<% end %>

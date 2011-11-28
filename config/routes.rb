@@ -1,5 +1,11 @@
 RR::Application.routes.draw do
 
+  match "/divisions/:id/dex_up/" => "divisions#dex_up"
+  resources :divisions
+  
+  resources :forums
+  match "/forums/:id/dex_up/" => "forums#dex_up"
+  
   resources :users
   resources :authentications, :only => [:index, :create, :destroy]
   

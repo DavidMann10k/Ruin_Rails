@@ -48,7 +48,7 @@ describe UsersController do
       it "show" do
         @user.save!
         get :show, :id => @user.id
-        response.should have_selector("title", :content => "#{@base_title}/#{@user.name.downcase}")
+        response.should have_selector("title", :content => "#{@base_title}/#{@user.name}")
         @user.destroy
       end
     end
@@ -57,9 +57,18 @@ describe UsersController do
   describe "show" do
     
     it "should have an edit button for current user" do
+      @user.save!
       session[:user_id] = @user.id
       get :show, :id => @user.id
       response.should have_selector("a", :content => "Edit Details")
+      @user.destroy
+    end
+    
+    it "should not have an edit button for non-signed in user" do
+      @user.save!
+      get :show, :id => @user.id
+      response.should_not have_selector("a", :content => "Edit Details")
+      @user.destroy
     end
   end
 end

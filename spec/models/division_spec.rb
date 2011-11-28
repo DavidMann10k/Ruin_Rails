@@ -3,9 +3,7 @@ require 'spec_helper'
 describe Division do
   
   before(:each) do
-    @division = Division.new
-    @division.dex = 1
-    @division.title = "Division Title"
+    @division = FactoryGirl.build(:division)
   end
   
   it "should create an instance with the right attributes" do

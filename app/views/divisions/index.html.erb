@@ -1,0 +1,20 @@
+<% @divisions.each do |d| %>
+	<div class="division">
+		<h3><sup><%= d.id %> <%= d.dex %></sup>
+			<%= link_to d.title, :action => "show", :controller => "divisions", :id => d.id %></h3>
+			<span id="control">
+				<%= link_to "^", :controller => "divisions", :action => "dex_up", :id => d.id %>
+				<%= link_to "New Forum", :controller => "forums", :action => "new", :division_id => d.id %>
+			</span>
+		<table>
+			<% d.forums.each do |f| %>
+				<tr>
+					<td class="thin"><%= f.id %></td>
+					<td class="thin"><%= f.dex %></td>
+					<td><%= link_to f.title, :action => "show", :controller => "forums", :id => f.id %></td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+<% end %>
+<%= link_to "Create New Division", "divisions/new" %>

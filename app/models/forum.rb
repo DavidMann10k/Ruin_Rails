@@ -4,10 +4,8 @@ class Forum < ActiveRecord::Base
   belongs_to :division
   has_many :topics, :dependent => :destroy
     
-  validates :dex, :numericality => { :only_integer => true },
-                  :presence => true
-  validates :division_id, :numericality => { :only_integer => true },
-                    :presence => true
+  validates :dex, :presence => true, :numericality => { :only_integer => true }
+  validates :division_id, :presence => true, :numericality => { :only_integer => true }
   validates :title, :length => { :maximum => 100 },
                     :presence => true
                     

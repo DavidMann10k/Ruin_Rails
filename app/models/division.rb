@@ -3,7 +3,7 @@ class Division < ActiveRecord::Base
   
   has_many :forums, :dependent => :destroy
     
-  validates :dex, :presence => true
+  validates :dex, :presence => true, :numericality => { :only_integer => true }
   validates :title, :presence => true,
                     :length => { :maximum => 100 }
   

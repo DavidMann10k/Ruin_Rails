@@ -1,14 +1,33 @@
 FactoryGirl.define do
-        
+  
   factory :user do
-    sequence(:name) { |n| "user #{n}" }
-    sequence(:email) { |n| "user#{n}@email.com" }
+    name {Faker::Name.name}
+    sequence(:email) { |n| "#{n}" + Faker::Internet.email }
     admin false
   end
   
   factory :admin, :class => User do
-    sequence(:name) {|n| "Admin User #{n}" }
-    sequence(:email) {|n| "admin#{n}@user.com" }
+    name {"(A) " + Faker::Name.name}
+    sequence(:email) { |n| "#{n}" + Faker::Internet.email }
     admin true
+  end
+  
+  factory :division, :class => Division do
+    sequence(:dex) { |n| n }
+    title { Faker::Lorem.words(3).join(" ") }
+  end
+  
+  factory :forum, :class => Forum do
+    sequence(:division_id) {|n| n/4}
+    sequence(:dex) { |n| n }
+    title {Faker::Company.name}
+  end
+  
+  factory :topic, :class => Topic do
+    title Faker::Company.bs
+  end
+  
+  factory :post, :class => Post do
+    content {Faker::Company.catch_phrase + ". " + Faker::Lorem.paragraphs(2).join(" ")}
   end
 end

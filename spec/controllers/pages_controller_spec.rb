@@ -22,23 +22,19 @@ describe PagesController do
     
     describe "correct title for" do
       
-      before(:each) do
-        @base_title = "Ruin_Rails"
-      end
-        
       it "root" do
         get "root"
-        response.should have_selector("title", :content => "#{@base_title}/")
+        response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/")
       end
         
       it "about" do
         get "about"
-        response.should have_selector("title", :content => "#{@base_title}/about")
+        response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/about")
       end
         
       it "about_ruin_rails" do
         get "about_ruin_rails"
-        response.should have_selector("title", :content => "#{@base_title}/about_ruin_rails")
+        response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/about_ruin_rails")
       end
     end
     describe "correct h1 for" do

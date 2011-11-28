@@ -2,6 +2,15 @@
   -moz-border-radius:    $radius
   -webkit-border-radius: $radius
   border-radius:         $radius
+  
+  
+@mixin cool_link
+  background: $link_alt
+  padding: 5px
+  @include round
+  &:hover
+    background: $link
+    color: $link_alt
 
 body
   background: $gre_1
@@ -29,27 +38,35 @@ header
       li
         display: inline
     a
-      background: $link_alt
-      color: $link
-      
-      padding: 5px
-      margin: 5px
+      @include cool_link
       @include round
-      &:hover
-        background: $link
-        color: $link_alt  
-
-  
-  
-  
+      margin: 5px
+      
 section
   border-width: 4px
   border-color: $gre_2
   border-style: groove hidden groove hidden
   
-  padding: 20px  
+  padding-left: 3px
+  padding-right: 3px
+  padding-bottom: 20px
   margin-top: 10px
   @include round(30px)
+
+.division
+  span#control a
+    @include cool_link
+
+.thin
+  width: 10px
+  text-align: center
+  
+div.division
+  border: 2px solid $gre_2
+  @include round
+  
+#control
+  float: right
   
 footer
   padding: 20px
