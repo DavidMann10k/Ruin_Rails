@@ -1,5 +1,7 @@
 RR::Application.routes.draw do
 
+  resources :topics
+
   match "/divisions/:id/dex_up/" => "divisions#dex_up"
   resources :divisions
   

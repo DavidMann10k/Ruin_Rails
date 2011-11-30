@@ -18,13 +18,12 @@ FactoryGirl.define do
   end
   
   factory :forum, :class => Forum do
-    sequence(:division_id) {|n| n/4}
     sequence(:dex) { |n| n }
     title {Faker::Company.name}
   end
   
   factory :topic, :class => Topic do
-    title Faker::Company.bs
+    title {Faker::Company.bs}
   end
   
   factory :post, :class => Post do

@@ -1,11 +1,13 @@
 class ForumsController < ApplicationController
   def new
-    @division_id = params[:division_id]
-    @title = "Forums/new"
+    @division = Division.find(params[:division_id])
+    @title = "#{@division.title}/Forums/new"
     @forum = Forum.new
   end
 
   def create
+    @user = current_user
+    @title = "#{Division.find(params[:division_id]).title}/Forums/new"
     if params[:commit] == "Cancel"
       redirect_to divisions_path
     else
@@ -24,26 +26,30 @@ class ForumsController < ApplicationController
 
   def show
     @forum = Forum.find(params[:id])
-    @title = @forum.title
+    @title = "#{@forum.division.title}/#{@forum.title}"
+    @topics = @forum.topics
   end
 
   def edit
     @forum = Forum.find(params[:id])
+    @title = "#{@forum.division.title}/#{@forum.title}/edit"
   end
 
   def update
     @forum = Forum.find(params[:id])
+    @title = "#{@forum.division.title}/#{@forum.title}/edit"
     
     if params[:commit] == "Cancel"
+      flash[:success] = "Forum updated successfully."
       redirect_to forum_path(@forum.id)
     else
       if @forum.update_attributes(params[:forum])
         flash[:success] = "Forum updated successfully."
       else
         flash[:error] = "Forum update failed."
+        redirect_to forum_path(@forum.id)
       end
     end
-      redirect_to forum_path(@forum.id)
   end
 
   def destroy

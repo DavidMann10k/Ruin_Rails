@@ -25,11 +25,15 @@ class ApplicationController < ActionController::Base
   
   def deny_access
     store_location
-    redirect_to signin_path, :notice => "Please sign in to access this page."
+    redirect_to signin_path, :notice => "Please sign for this action."
   end
   
   private
     def user_from_session
       User.find_by_id(session[:user_id]) if session[:user_id]
+    end
+    
+    def store_location
+      session[:return_to] = request.fullpath
     end
 end
