@@ -8,4 +8,5 @@ class Post < ActiveRecord::Base
   validates :user_id, :numericality => { :only_integer => true },
                       :presence => true
   belongs_to :topic
+  belongs_to :user
 end

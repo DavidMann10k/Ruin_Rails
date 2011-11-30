@@ -1,2 +1,13 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<%= render "shared/forums_nav" %>
+<%= form_for(@post) do |p| %>
+	<%= render 'shared/error_messages', :object => p.object %>
+	<div class="field">
+		<%= f.label :content %><br />
+		<%= f.text_field :content, :autofocus => true %>
+	</div>
+	<%= hidden_field_tag(:topic_id, params[:topic_id]) %>
+	<div class="actions">
+		<%= f.submit "Confirm Editions" %>
+		<%= f.submit "Cancel" %>
+	</div>
+<% end %>

@@ -3,3 +3,14 @@
 <%= link_to "Destroy", @topic, :method => :delete,
 							  	:confirm => "Topic and all child posts will be permanently and irrecoverably destroyed!  Are you sure?",
 							  	:title => "Delete #{@topic.title}" %>
+<table>
+	<% @topic.posts.each do |p| %>
+		<tr>
+			<td><%= p.content %></td>
+			<td><%= p.user.name %></td>
+			<td>Updated: <%= p.updated_at %></td>
+			<td>Created: <%= p.created_at %></td>
+		</tr>
+	<% end %>
+</table>
+<%= link_to "Create Post", :controller => "posts", :action => "new", :topic_id => @topic.id %>

@@ -12,16 +12,32 @@ describe PostsController do
   end
   
   describe "GET 'new'" do
+    
+    before(:each) do
+      get :new, :id => @division.id, :topic_id => @topic.id
+    end
+    
     it "returns http success" do
-      get :new
       response.should be_success
+    end
+    
+    it "should have the right title" do
+      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/#{@division.title}/#{@forum.title}/#{@topic.title}/Posts/new")
     end
   end
 
   describe "GET 'edit'" do
-    it "returns http success" do
+    
+    before(:each) do
       get :edit, :id => @post.id
+    end
+    
+    it "returns http success" do
       response.should be_success
+    end
+    
+    it "should have the right title" do
+      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/#{@division.title}/#{@forum.title}/#{@topic.title}/Post:#{@post.created_at}/edit")
     end
   end
 

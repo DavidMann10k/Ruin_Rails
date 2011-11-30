@@ -2,6 +2,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title, :forum_id
   
   belongs_to :forum
+  belongs_to :user
   has_many :posts, :dependent => :destroy
 
   validates :forum_id, :numericality => { :only_integer => true },

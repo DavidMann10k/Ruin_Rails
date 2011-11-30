@@ -1,2 +1,13 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<%= render "shared/forums_nav" %>
+<%= form_for(@post) do |p| %>
+	<%= render 'shared/error_messages', :object => p.object %>
+	<div class="field">
+		<%= p.label :content %><br />
+		<%= p.text_field :content, :autofocus => true %>
+	</div>
+	<%= hidden_field_tag(:topic_id, params[:topic_id]) %>
+	<div class="actions">
+		<%= p.submit "Create Post" %>
+		<%= p.submit "Cancel" %>
+	</div>
+<% end %>
