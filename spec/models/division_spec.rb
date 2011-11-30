@@ -37,4 +37,11 @@ describe Division do
     division1.swap_dex_with(division2)
     division2.dex.should eq(1)
   end
+  
+  
+  describe "public attribute" do
+    
+    it "should respond to public"
+    
+  end
 end

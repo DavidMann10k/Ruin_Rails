@@ -1,17 +1,17 @@
 RR::Application.routes.draw do
 
-  resources :topics
 
-  match "/divisions/:id/dex_up/" => "divisions#dex_up"
+#forums
   resources :divisions
-  
+  match "/divisions/:id/dex_up/" => "divisions#dex_up"  
   resources :forums
-  match "/forums/:id/dex_up/" => "forums#dex_up"
+  match "/forums/:id/dex_up/" => "forums#dex_up"  
+  resources :topics  
+  resources :posts
   
+#user, session, authentication
   resources :users
   resources :authentications, :only => [:index, :create, :destroy]
-  
-  root :to => 'pages#root'
   
   match '/auth/:service/callback', :to => 'authentications#auth_callback' 
   match '/auth/failure',           :to => 'authentications#failure'  
@@ -19,6 +19,10 @@ RR::Application.routes.draw do
   match "/signout",                :to => "authentications#signout"
   
   match "/register",         :to => "users#new"
+  
+#root and pages
+  root :to => 'pages#root'
+  
   match "/signin",           :to => "pages#sign_in"
   match "/about",            :to => "pages#about"
   match "/about_ruin_rails", :to => "pages#about_ruin_rails"
