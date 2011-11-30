@@ -2,12 +2,12 @@
 <%= form_for(@post) do |p| %>
 	<%= render 'shared/error_messages', :object => p.object %>
 	<div class="field">
-		<%= f.label :content %><br />
-		<%= f.text_field :content, :autofocus => true %>
+		<%= p.label :content %><br />
+		<%= p.text_field :content, :autofocus => true %>
 	</div>
 	<%= hidden_field_tag(:topic_id, params[:topic_id]) %>
 	<div class="actions">
-		<%= f.submit "Confirm Editions" %>
-		<%= f.submit "Cancel" %>
+		<%= p.submit "Confirm Editions" %>
+		<%= p.submit "Cancel" %>
 	</div>
 <% end %>
