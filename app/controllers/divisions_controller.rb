@@ -26,11 +26,12 @@ class DivisionsController < ApplicationController
 
   def show
     @division = Division.find(params[:id])
-    @title = @division.title
+    @title = "Divisions/#{@division.title}"
   end
 
   def edit
     @division = Division.find(params[:id])
+    @title = "Divisions/#{@division.title}/edit"
   end
 
   def update

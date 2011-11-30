@@ -17,9 +17,9 @@ class TopicsController < ApplicationController
       
       if @topic.save
         flash[:success] = "Topic, #{@topic.title} created successfully!"
-        redirect_to :controller => "forums", :action => "show", :id => @topic.forum_id
+        redirect_to :controller => "Topics", :action => "show", :id => @topic.forum_id
       else
-        flash[:error] = "Error in topic creation process!"
+        flash[:error] = "Error in topics creation process!"
         render 'new'
       end
     end
@@ -27,7 +27,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @title = @topic.title
+    @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}"
   end
 
   def edit

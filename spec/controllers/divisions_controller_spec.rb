@@ -3,6 +3,13 @@ require 'spec_helper'
 describe DivisionsController do
   render_views
 
+  before(:each) do
+    @user = FactoryGirl.create :user
+    @division = FactoryGirl.create :division
+    @forum = FactoryGirl.create :forum, :division_id => @division.id
+    @topic = FactoryGirl.create :topic, :forum_id => @forum.id, :user_id => @user.id
+  end
+  
   describe "GET 'index'" do
     
     before(:each) do
@@ -34,11 +41,7 @@ describe DivisionsController do
   end
 
   describe "GET 'show'" do
-    
-    before(:each) do
-      @division = FactoryGirl.create(:division)
-    end
-    
+        
     before(:each) do
       get 'show', :id => @division.id
     end
@@ -48,44 +51,39 @@ describe DivisionsController do
     end
     
     it "should have the right title" do
-      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/#{@division.title}")
+      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/Divisions/#{@division.title}")
     end
     
     it "should list child forums"
   end
 
   describe "GET 'edit'" do
-    
+        
     before(:each) do
-      @div = FactoryGirl.create(:division)
-      get :edit, :id => @div.id
+      get :edit, :id => @division.id          
     end
-    
+        
     it "returns http success" do
       response.should be_success
+    end
+    
+    it "should have the right title" do
+      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/Divisions/#{@division.title}/edit")
     end
   end
 
   describe "GET 'update'" do
     
-    before(:each) do
-      @div = FactoryGirl.create(:division)
-      get :update, :id => @div.id
-    end
-    
     it "should redirect" do
+      get :update, :id => @division.id
       response.should be_redirect
     end
   end
 
   describe "GET 'destroy'" do
-    
-    before(:each) do
-      @div = FactoryGirl.create(:division)
-      get :destroy, :id => @div
-    end
-    
+        
     it "should redirect" do
+      get :destroy, :id => @division.id
       response.should be_redirect
     end
     

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ForumsController do
+  render_views
 
   before(:each) do
     @user = FactoryGirl.create :user
@@ -10,12 +11,18 @@ describe ForumsController do
   end
   
   describe "GET 'new'" do
-    it "returns http success" do
+    
+    before(:each) do
       get 'new', :division_id => @division.id
+    end
+    
+    it "returns http success" do
       response.should be_success
     end
     
-    it "should have the right title"
+    it "should have the right title" do
+      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/#{@forum.division.title}/Forums/new")
+    end
   end
 
   describe "GET 'create'" do
@@ -27,18 +34,32 @@ describe ForumsController do
   end
 
   describe "GET 'show'" do
-    it "returns http success" do
+    
+    before(:each) do
       get :show, :id => @forum.id
+    end
+    
+    it "returns http success" do
       response.should be_success
     end
     
-    it "should have the right title"
+    it "should have the right title" do
+      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/#{@forum.division.title}/#{@forum.title}")
+    end
   end
 
   describe "GET 'edit'" do
-    it "returns http success" do
+    
+    before(:each) do
       get 'edit', :id => @forum.id
+    end
+    
+    it "returns http success" do
       response.should be_success
+    end
+    
+    it "should have the right title" do
+      response.should have_selector("title", :content => "#{RR::Application::GLOBAL_TITLE}/#{@forum.division.title}/#{@forum.title}/edit")
     end
   end
 
