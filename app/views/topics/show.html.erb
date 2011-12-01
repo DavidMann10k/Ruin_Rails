@@ -16,12 +16,12 @@
 				<td>
 					<div class="content">
 						<%= link_to "-#{p.user.name}", user_path(p.user.id) %>
-						<%= p.content %>
+						<%= simple_format(p.content) %>
 					</div><br/>
 						<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
 				</td>
 			</tr>
 		<% end %>
 	</table>
-	<%= link_to "Create Post", :controller => "posts", :action => "new", :topic_id => @topic.id %>
+	<%= link_to "+Post", new_post_path(:topic_id => @topic.id), :class => "add_item" %>
 </div>
