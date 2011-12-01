@@ -3,8 +3,7 @@ class Post < ActiveRecord::Base
   
   validates :topic_id, :numericality => { :only_integer => true },
                        :presence => true
-  validates :content, :length => { :maximum => 1000 },
-                      :presence => true
+  validates :content, :presence => true
   validates :user_id, :numericality => { :only_integer => true },
                       :presence => true
   belongs_to :topic
