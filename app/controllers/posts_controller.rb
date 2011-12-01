@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  
+  before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
+  
   def new
     @post = Post.new
     @topic = Topic.find(params[:topic_id])
@@ -8,7 +11,6 @@ class PostsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}/Posts/new"
-    authenticate
     if params[:commit] == "Cancel"
       redirect_to :controller => "topics", :action => "show", :id => @topic.id
     else

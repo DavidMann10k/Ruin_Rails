@@ -1,4 +1,6 @@
-<%= link_to "Forums", divisions_path %>
+<%= link_to "/Divisions", divisions_path %>
+<%= link_to "/#{@forum.division.title}", division_path(@forum.division.id)%>
+<%= link_to "/#{@forum.title}", forum_path(@forum.id) %>
 <%= form_for(@topic) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
 	<div class="field">

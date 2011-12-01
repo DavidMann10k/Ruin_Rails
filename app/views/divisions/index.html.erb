@@ -1,20 +1,27 @@
+<%= render "nav" %>
 <% @divisions.each do |d| %>
-	<div class="division">
-		<h3><sup><%= d.id %> <%= d.dex %></sup>
-			<%= link_to d.title, :action => "show", :controller => "divisions", :id => d.id %></h3>
-			<span id="control">
-				<%= link_to "^", :controller => "divisions", :action => "dex_up", :id => d.id %>
-				<%= link_to "New Forum", :controller => "forums", :action => "new", :division_id => d.id %>
-			</span>
+	<div class="division_list">
+		<h3 class="tainer_title">
+			<sup><%= d.id %> <%= d.dex %></sup>
+			<%= link_to d.title, :action => "show", :controller => "divisions", :id => d.id %>
+			<sup><%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => d.id}, :class => "up" %></sup>
+			
+			<sup><%= link_to "X", d, 	:method => :delete,
+							  	  		:confirm => "Division and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
+							  	  		:title => "Delete #{d.title}",
+							  	  		:class => "destroy" %></sup>
+		</h3>
+			
 		<table>
 			<% d.forums.each do |f| %>
-				<tr>
+				<tr class="forum_item">
 					<td class="thin"><%= f.id %></td>
 					<td class="thin"><%= f.dex %></td>
 					<td><%= link_to f.title, :action => "show", :controller => "forums", :id => f.id %></td>
 				</tr>
 			<% end %>
 		</table>
+		<%= link_to "New Forum", {:controller => "forums", :action => "new", :division_id => d.id}, :class => "add_item" %>
 	</div>
 <% end %>
-<%= link_to "Create New Division", "divisions/new" %>
+<%= link_to "New Division", "divisions/new", :class => "add_tainer" %>

@@ -1,5 +1,7 @@
 class DivisionsController < ApplicationController
   
+  before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy, :dex_up ]
+  
   def index
     @divisions = Division.order("dex ASC").all
     @title = "Divisions"
@@ -11,10 +13,12 @@ class DivisionsController < ApplicationController
   end
 
   def create
-    if params[:commit] == "Cancel"
+    @title = "Divisions/new"
+    @division = Division.new(:title => params[:division][:title], :dex => new_division_dex)
     
+    if params[:commit] == "Cancel"
+        redirect_to divisions_path
     else
-      @division = Division.new(:title => params[:division][:title], :dex => new_division_dex)
       if @division.save
         redirect_to divisions_path
       else
@@ -38,11 +42,11 @@ class DivisionsController < ApplicationController
     @division = Division.find(params[:id])
     
     if params[:commit] == "Cancel"
-      redirect_to divisions_path(@division.id)
+      redirect_to division_path(@division.id)
     else
       if @division.update_attributes(params[:division])
         flash[:success] = "Division updated successfully."
-        redirect_to divisions_path
+        redirect_to division_path(@division.id)
       else
         flash[:error] = "Division update failed."
         render 'edit'
@@ -67,7 +71,8 @@ class DivisionsController < ApplicationController
     redirect_to divisions_path
   end
   
-  def new_division_dex
-      dex = Division.count
-  end
+  private
+    def new_division_dex
+        dex = Division.count
+    end
 end

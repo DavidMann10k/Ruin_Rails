@@ -1,13 +1,22 @@
-<%= link_to "Forums", divisions_path %>
-<%= link_to "Edit", :controller => "forums", :action => "edit", :id => @forum.id %>
-<%= link_to "Destroy", @forum, :method => :delete,
-							  :confirm => "Forum and all child topcs will be permanently and irrecoverably destroyed!  Are you sure?",
-							  :title => "Delete #{@forum.title}" %>
-<%= link_to "Create New Topic", :controller => "topics", :action => "new", :forum_id => @forum.id %>
-<table>
-	<% @topics.each do |t| %>
-		<tr>
-			<td><%= link_to t.title, :controller => "topics", :action => "show", :id => t.id %></td>
-		</tr>
-	<% end %>
-</table>
+<%= link_to "/Divisions", divisions_path %> <%= link_to "/#{@forum.division.title}", division_path(@forum.division.id)%>
+<div class="forum_list">
+	<h3 class="tainer_title">
+		<sup><%= @forum.id %> <%= @forum.dex %></sup>
+		<%= @forum.title %>			
+		<sup><%= link_to "X", @forum, 	:method => :delete,
+						  	  				:confirm => "Forum and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
+						  	  				:title => "Delete #{@forum.title}",
+						  	  				:class => "destroy" %></sup>
+		<sup><%= link_to "Edit", edit_forum_path(@forum.id), :class => "edit" %></sup>
+	</h3>
+
+	<table>
+		<% @forum.topics.each do |t| %>
+			<tr topic_item>
+				<td><%= link_to t.title, :controller => "topics", :action => "show", :id => t.id %></td>
+			</tr>
+		<% end %>
+	</table>
+	
+	<%= link_to "New Topic", new_topic_path(:forum_id => @forum.id), :class => "add_item" %>
+</div>

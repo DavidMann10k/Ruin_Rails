@@ -1,4 +1,4 @@
-<%= link_to "Forums", divisions_path %>
+<%= render "nav" %>
 <%= form_for(@division) do |d| %>
 	<%= render 'shared/error_messages', :object => d.object %>
 	<div class="field">

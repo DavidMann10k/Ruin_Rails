@@ -13,7 +13,7 @@ describe DivisionsController do
   describe "GET 'index'" do
     
     before(:each) do
-      get 'index'
+      get :index
     end
     
     it "returns http success" do

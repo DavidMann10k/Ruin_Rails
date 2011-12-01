@@ -1,4 +1,7 @@
 class TopicsController < ApplicationController
+  
+  before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
+  
   def new
     @topic = Topic.new
     @forum = Forum.find params[:forum_id]
@@ -6,18 +9,17 @@ class TopicsController < ApplicationController
   end
   
   def create
-    authenticate
+      @topic = Topic.new(:title     => params[:topic][:title],                    
+                         :forum_id  => params[:forum_id])
+      @topic.user_id = current_user.id
+      
     if params[:commit] == "Cancel"
       redirect_to forum_path, id => params[:forum_id]
     else
-      @topic = Topic.new
-      @topic.update_attributes(:title     => params[:topic][:title],                    
-                               :forum_id  => params[:forum_id])
-      @topic.user_id = current_user.id
       
       if @topic.save
         flash[:success] = "Topic, #{@topic.title} created successfully!"
-        redirect_to :controller => "topics", :action => "show", :id => @topic.forum_id
+        redirect_to :controller => "topics", :action => "show", :id => @topic.id
       else
         flash[:error] = "Error in topics creation process!"
         render 'new'

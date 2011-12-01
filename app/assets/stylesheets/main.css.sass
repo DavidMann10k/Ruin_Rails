@@ -11,6 +11,26 @@
   &:hover
     background: $link
     color: $link_alt
+    
+@mixin button
+  background: black
+  padding-top: 2px
+  padding-bottom: 2px
+  padding-left: 7px
+  padding-right: 7px
+  @include round(200px)
+  &:hover
+    background: $link
+    color: $link_alt
+
+@mixin tainer
+  padding: 15px
+  margin-top: 15px
+  margin-bottom: 15px
+  border: solid 2px $gre_2
+
+tbody tr.even td
+  background: black
 
 body
   background: $gre_1
@@ -52,21 +72,49 @@ section
   padding-bottom: 20px
   margin-top: 10px
   @include round(30px)
+  
+.division_list
+  @include tainer
 
-.division
-  span#control a
-    @include cool_link
+.forum_list
+  @include tainer
+  
+.topic_list
+  @include tainer
+  
+.division_item
 
+.forum_item
+  font-size: 1.5em
+  
+.topic_item
+  
+.tainer_title
+  @include round(15px)
+  background: $gre_2
+  float: left
+  padding: 10px
+  font-size: 2em
+
+.add_tainer
+  @include cool_link
+  margin-top: 200px
+.add_item
+  @include cool_link
+  
 .thin
   width: 10px
-  text-align: center
+  
+.up
+  @include button
+.destroy
+  @include button
+.edit
+  @include button
   
 div.division
   border: 2px solid $gre_2
   @include round
-  
-#control
-  float: right
   
 footer
   padding: 20px
