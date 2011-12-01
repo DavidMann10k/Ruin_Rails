@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117191933) do
+ActiveRecord::Schema.define(:version => 20111201213452) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20111117191933) do
   end
 
   create_table "posts", :force => true do |t|
-    t.string   "content"
+    t.text     "content",    :limit => 255
     t.integer  "topic_id"
     t.integer  "user_id"
     t.datetime "created_at"
