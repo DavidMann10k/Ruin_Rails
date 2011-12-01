@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
+  before_filter :authorize, :only => [ :destroy ]
   
   def new
     @topic = Topic.new

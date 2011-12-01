@@ -1,6 +1,7 @@
 class DivisionsController < ApplicationController
   
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy, :dex_up ]
+  before_filter :authorize, :only => [ :new, :create, :edit, :update, :destroy, :dex_up ]
   
   def index
     @divisions = Division.order("dex ASC").all

@@ -28,6 +28,14 @@ class ApplicationController < ActionController::Base
     redirect_to signin_path, :notice => "Please sign for this action."
   end
   
+  def authorize
+    block_action unless admin?
+  end
+  
+  def block_action
+    redirect_to root_path, :notice => "Not authorized for this action."
+  end
+  
   private
     def user_from_session
       User.find_by_id(session[:user_id]) if session[:user_id]
