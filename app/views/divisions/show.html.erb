@@ -1,23 +1,23 @@
 <%= link_to "/Divisions", divisions_path %>
 <div class="list">
 	<h3 class="title">
-		<sup><%= @division.id %> <%= @division.dex %></sup>
+		<sup><%= @division.id if admin? %> <%= @division.dex if admin? %></sup>
 		<%= @division.title %>			
 		<sup><%= link_to "X", @division, 	:method => :delete,
 						  	  				:confirm => "Division and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
 						  	  				:title => "Delete #{@division.title}",
-						  	  				:class => "destroy" %></sup>
-		<sup><%= link_to "Edit", edit_division_path(@division.id), :class => "edit" %></sup>
+						  	  				:class => "destroy" if admin? %></sup>
+		<sup><%= link_to "Edit", edit_division_path(@division.id), :class => "edit" if admin? %></sup>
 	</h3>
 		
 	<table>
 		<% @division.forums.each do |f| %>
 			<tr class="item">
-				<td class="thin"><%= f.id %></td>
-				<td class="thin"><%= f.dex %></td>
+				<td class="thin"><%= f.id if admin? %></td>
+				<td class="thin"><%= f.dex if admin? %></td>
 				<td><%= link_to f.title, :action => "show", :controller => "forums", :id => f.id %></td>
 			</tr>
 		<% end %>
 	</table>
-	<%= link_to "+Forum", new_forum_path(:division_id => @division.id), :class => "add_item" %>
+	<%= link_to "+Forum", new_forum_path(:division_id => @division.id), :class => "add_item" if admin? %>
 </div>

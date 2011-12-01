@@ -1,13 +1,13 @@
 <%= link_to "/Divisions", divisions_path %> <%= link_to "/#{@topic.forum.division.title}", division_path(@topic.forum.division.id)%>  <%= link_to "/#{@topic.forum.title}", forum_path(@topic.forum.id) %>
 <div class="list">
 	<h3 class="title">
-		<sup><%= @topic.id %></sup>
+		<sup><%= @topic.id if admin? %></sup>
 		<%= @topic.title %>			
 		<sup><%= link_to "X", @topic, 	:method => :delete,
 						  	  				:confirm => "Topic and all child posts will be permanently and irrecoverably destroyed!  Are you sure?",
 						  	  				:title => "Delete #{@topic.title}",
-						  	  				:class => "destroy" %></sup>
-		<sup><%= link_to "Edit", edit_topic_path(@topic.id), :class => "edit" %></sup>
+						  	  				:class => "destroy" if admin? %></sup>
+		<sup><%= link_to "Edit", edit_topic_path(@topic.id), :class => "edit" if admin? %></sup>
 	</h3>
 							  	
 	<table>
