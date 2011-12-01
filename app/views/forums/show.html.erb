@@ -1,6 +1,6 @@
 <%= link_to "/Divisions", divisions_path %> <%= link_to "/#{@forum.division.title}", division_path(@forum.division.id)%>
-<div class="forum_list">
-	<h3 class="tainer_title">
+<div class="list">
+	<h3 class="title">
 		<sup><%= @forum.id %> <%= @forum.dex %></sup>
 		<%= @forum.title %>			
 		<sup><%= link_to "X", @forum, 	:method => :delete,
@@ -11,12 +11,14 @@
 	</h3>
 
 	<table>
-		<% @forum.topics.each do |t| %>
-			<tr topic_item>
-				<td><%= link_to t.title, :controller => "topics", :action => "show", :id => t.id %></td>
+		<% @forum.topics.order("updated_at DESC").each do |t| %>
+			<tr class="item">
+				<td><%= link_to t.title, topic_path(t.id) %></td>
+				<td class="thin"><nobr><%= link_to "-#{t.user.name}", user_path(t.user.id) %></nobr></td>
+				<td class="thin"><nobr>@<%= t.created_at %></nobr></td>
 			</tr>
 		<% end %>
 	</table>
 	
-	<%= link_to "New Topic", new_topic_path(:forum_id => @forum.id), :class => "add_item" %>
+	<%= link_to "+Topic", new_topic_path(:forum_id => @forum.id), :class => "add_item" %>
 </div>

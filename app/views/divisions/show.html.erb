@@ -1,6 +1,6 @@
-<%= render "nav" %>
-<div class="division_list">
-	<h3 class="tainer_title">
+<%= link_to "/Divisions", divisions_path %>
+<div class="list">
+	<h3 class="title">
 		<sup><%= @division.id %> <%= @division.dex %></sup>
 		<%= @division.title %>			
 		<sup><%= link_to "X", @division, 	:method => :delete,
@@ -12,12 +12,12 @@
 		
 	<table>
 		<% @division.forums.each do |f| %>
-			<tr class="forum_item">
+			<tr class="item">
 				<td class="thin"><%= f.id %></td>
 				<td class="thin"><%= f.dex %></td>
 				<td><%= link_to f.title, :action => "show", :controller => "forums", :id => f.id %></td>
 			</tr>
 		<% end %>
 	</table>
-	<%= link_to "New Forum", new_forum_path(:division_id => @division.id), :class => "add_item" %>
+	<%= link_to "+Forum", new_forum_path(:division_id => @division.id), :class => "add_item" %>
 </div>

@@ -1,7 +1,7 @@
-<%= render "nav" %>
+<%= link_to "/Divisions", divisions_path %>
 <% @divisions.each do |d| %>
-	<div class="division_list">
-		<h3 class="tainer_title">
+	<div class="list">
+		<h3 class="title">
 			<sup><%= d.id %> <%= d.dex %></sup>
 			<%= link_to d.title, :action => "show", :controller => "divisions", :id => d.id %>
 			<sup><%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => d.id}, :class => "up" %></sup>
@@ -14,14 +14,15 @@
 			
 		<table>
 			<% d.forums.each do |f| %>
-				<tr class="forum_item">
+				
+				<tr class="item">
 					<td class="thin"><%= f.id %></td>
 					<td class="thin"><%= f.dex %></td>
-					<td><%= link_to f.title, :action => "show", :controller => "forums", :id => f.id %></td>
+					<td><%= link_to f.title, forum_path(f.id) %></td>
 				</tr>
 			<% end %>
 		</table>
-		<%= link_to "New Forum", {:controller => "forums", :action => "new", :division_id => d.id}, :class => "add_item" %>
+		<%= link_to "+Forum", {:controller => "forums", :action => "new", :division_id => d.id}, :class => "add_item" %>
 	</div>
 <% end %>
-<%= link_to "New Division", "divisions/new", :class => "add_tainer" %>
+<%= link_to "+Division", "divisions/new", :class => "add_list" %>

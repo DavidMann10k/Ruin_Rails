@@ -1,16 +1,27 @@
 <%= link_to "/Divisions", divisions_path %> <%= link_to "/#{@topic.forum.division.title}", division_path(@topic.forum.division.id)%>  <%= link_to "/#{@topic.forum.title}", forum_path(@topic.forum.id) %>
-<%= link_to "Edit", :controller => "topics", :action => "edit", :id => @topic.id %>
-<%= link_to "Destroy", @topic, :method => :delete,
-							  	:confirm => "Topic and all child posts will be permanently and irrecoverably destroyed!  Are you sure?",
-							  	:title => "Delete #{@topic.title}" %>
-<table>
-	<% @topic.posts.each do |p| %>
-		<tr>
-			<td><%= p.content %></td>
-			<td><%= p.user.name %></td>
-			<td>Updated: <%= p.updated_at %></td>
-			<td>Created: <%= p.created_at %></td>
-		</tr>
-	<% end %>
-</table>
-<%= link_to "Create Post", :controller => "posts", :action => "new", :topic_id => @topic.id %>
+<div class="list">
+	<h3 class="title">
+		<sup><%= @topic.id %></sup>
+		<%= @topic.title %>			
+		<sup><%= link_to "X", @topic, 	:method => :delete,
+						  	  				:confirm => "Topic and all child posts will be permanently and irrecoverably destroyed!  Are you sure?",
+						  	  				:title => "Delete #{@topic.title}",
+						  	  				:class => "destroy" %></sup>
+		<sup><%= link_to "Edit", edit_topic_path(@topic.id), :class => "edit" %></sup>
+	</h3>
+							  	
+	<table>
+		<% @topic.posts.each do |p| %>
+			<tr>
+				<td>
+					<div class="content">
+						<%= link_to "-#{p.user.name}", user_path(p.user.id) %>
+						<%= p.content %>
+					</div><br/>
+						<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+	<%= link_to "Create Post", :controller => "posts", :action => "new", :topic_id => @topic.id %>
+</div>
