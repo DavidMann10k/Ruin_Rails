@@ -69,10 +69,8 @@ class PostsController < ApplicationController
   end
   
   def toggle_publish
-    if admin? || current_user == @post.user
       Post.find(params[:id]).toggle(:publish).save
-    end
-    redirect_to :back
+    
   end
   
   private
