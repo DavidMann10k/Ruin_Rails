@@ -3,7 +3,6 @@
   -webkit-border-radius: $radius
   border-radius:         $radius
   
-  
 @mixin cool_link
   background: $link_alt
   padding: 5px
@@ -13,8 +12,22 @@
     background: $link
     color: $link_alt
     
+@mixin hot_link
+  color: $red_2
+  background: $gre_2
+  border: 1px solid $gre_2
+  padding: 0px
+  padding-left: 15px
+  padding-right: 15px
+  margin: 2px
+  @include round(20px)
+  &:hover
+    color: $gre_2
+    background: $red_2
+    border: 1px solid $gre_2
+    
 @mixin button
-  background: black
+  background: $gre_1
   padding-top: 2px
   padding-bottom: 2px
   padding-left: 7px
@@ -38,23 +51,30 @@ header
   border-top: solid 3px $clr_3
   background: $clr_2
   border-bottom: solid 3px $clr_1
-    
   margin-top: 10px
-  padding: 7px
   h1
-    text-align: left
     display: inline
   a#logo
     color: $gre_2
-  nav
-    float: right
-    ul    
-      li
-        display: inline
-    a
-      @include cool_link
-      @include round
-      margin: 5px
+  table
+    margin: 0px
+    td#logo
+      width: 25%
+    td#site
+      text-align: center
+      a
+        @include hot_link
+    td#account
+      width: 25%
+      span
+        float: right
+      a
+        @include cool_link
+      
+#emblem
+  display: block
+  margin-left: auto
+  margin-right: auto
       
 section
   border-width: 4px

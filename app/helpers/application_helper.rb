@@ -1,18 +1,15 @@
 module ApplicationHelper
   
   def logo
-    "Ruin_Rails"
+    RR::Application::GLOBAL_TITLE
   end
   
   def title
     if @title.nil?
-      base_title
+      RR::Application::GLOBAL_TITLE
     else
-      "#{base_title}/#{@title}"
+      "#{RR::Application::GLOBAL_TITLE}/#{@title}"
     end
   end
   
-  def base_title
-    "Ruin_Rails"
-  end
 end
