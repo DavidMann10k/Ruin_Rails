@@ -69,8 +69,8 @@ class PostsController < ApplicationController
   end
   
   def toggle_publish
-      Post.find(params[:id]).toggle(:publish).save
-    
+    Post.find(params[:id]).toggle(:publish).save
+    redirect_to :back
   end
   
   private
