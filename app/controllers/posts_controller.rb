@@ -21,6 +21,7 @@ class PostsController < ApplicationController
       @post.user_id = current_user.id
       
       if @post.save
+        @post.topic.touch
         flash[:success] = "New post created successfully!"
         redirect_to :controller => "topics", :action => "show", :id => @post.topic_id
       else
@@ -29,6 +30,11 @@ class PostsController < ApplicationController
       end
     end
   end
+
+  def touch 
+    updated_at_will_change! 
+    save 
+  end 
 
   def edit
     @post = Post.find(params[:id])

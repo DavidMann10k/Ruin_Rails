@@ -20,11 +20,11 @@
   padding-left: 15px
   padding-right: 15px
   margin: 2px
+  font-style: 1.3em
   @include round(20px)
   &:hover
     color: $gre_2
     background: $red_2
-    border: 1px solid $gre_2
     
 @mixin button
   background: $gre_1
@@ -69,7 +69,7 @@ header
       width: 25%
       a
         @include cool_link
-      
+
 #emblem
   display: block
   margin-left: auto
@@ -85,6 +85,9 @@ section
   padding-bottom: 20px
   margin-top: 10px
   @include round(30px)
+  h1
+    margin: 5px
+    margin-right: 15px
   
 .list
   border: solid 3px $gre_2

@@ -1,4 +1,5 @@
 class AuthenticationsController < ApplicationController
+  include AuthenticationsHelper
   
   def auth_callback
     @omniauth = request.env['omniauth.auth']
@@ -25,7 +26,7 @@ class AuthenticationsController < ApplicationController
         redirect_to :action => "show", :controller => "users", :id => auth.user.id
       else
         # new user - register - users#new
-        flash[:notice] = "Not signed in, no authentication"
+        flash[:notice] = "New authentication detected.  Continue to create new account."
         redirect_to :controller => "users", :action => "new", :name     => @authhash[:name], 
                                                               :email    => @authhash[:email],
                                                               :uid      => @authhash[:uid],
@@ -50,34 +51,10 @@ class AuthenticationsController < ApplicationController
   end
 
   def failure
-    flash[:error] = "Authentication with your chosen provider has failed!  Try again or chose another."
+    flash[:error] = "Authentication with your chosen provider has failed!  Try again or choose another."
     redirect_to "/authenticate"
   end
 
-  def hash_by_service_route
-      authhash = Hash.new
-      if @service_route == 'facebook'
-        @omniauth['extra']['user_hash']['email'] ? authhash[:email] =  @omniauth['extra']['user_hash']['email'] : authhash[:email] = ''
-        @omniauth['extra']['user_hash']['name'] ? authhash[:name] =  @omniauth['extra']['user_hash']['name'] : authhash[:name] = ''
-        @omniauth['extra']['user_hash']['id'] ?  authhash[:uid] =  @omniauth['extra']['user_hash']['id'].to_s : authhash[:uid] = ''
-        @omniauth['provider'] ? authhash[:provider] = @omniauth['provider'] : authhash[:provider] = ''
-      elsif @service_route == 'github'
-        @omniauth['user_info']['email'] ? authhash[:email] =  @omniauth['user_info']['email'] : authhash[:email] = ''
-        @omniauth['user_info']['name'] ? authhash[:name] =  @omniauth['user_info']['name'] : authhash[:name] = ''
-        @omniauth['extra']['user_hash']['id'] ? authhash[:uid] =  @omniauth['extra']['user_hash']['id'].to_s : authhash[:uid] = ''
-        @omniauth['provider'] ? authhash[:provider] =  @omniauth['provider'] : authhash[:provider] = ''  
-      elsif ['google', 'yahoo', 'twitter', 'myopenid', 'open_id'].index(@service_route) != nil
-        @omniauth['user_info']['email'] ? authhash[:email] =  @omniauth['user_info']['email'] : authhash[:email] = ''
-        @omniauth['user_info']['name'] ? authhash[:name] =  @omniauth['user_info']['name'] : authhash[:name] = ''
-        @omniauth['uid'] ? authhash[:uid] = @omniauth['uid'].to_s : authhash[:uid] = ''
-        @omniauth['provider'] ? authhash[:provider] = @omniauth['provider'] : authhash[:provider] = ''
-      else        
-        # debug to output the hash that has been returned when adding new services
-        render :text => @omniauth.to_yaml
-        return
-      end
-      return authhash
-  end
   
   def signout
     if current_user
