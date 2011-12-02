@@ -12,15 +12,19 @@
 							  	
 	<table>
 		<% @topic.posts.each do |p| %>
-			<tr>
-				<td>
-					<div class="content">
-						<%= link_to "-#{p.user.name}", user_path(p.user.id) %>
-						<%= simple_format(p.content) %>
-					</div><br/>
-						<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
-				</td>
-			</tr>
+			<% if publish_post(p) %>
+				<tr>
+					<td>
+						<% if !p.publish %><p id="unpublished">UNPUBLISHED</p><% end %>
+						<div class="content">
+							<%= link_to "-#{p.user.name}", user_path(p.user.id) %>
+							<%= simple_format(p.content) %>
+						</div><br/>
+							<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
+							<%= link_to "P", {:controller => "posts", :action => "toggle_publish", :id => p.id}, :alt => "(un)Publish" if admin? || current_user?(p.user) %>
+					</td>
+				</tr>
+			<% end %>
 		<% end %>
 	</table>
 	<%= link_to "+Post", new_post_path(:topic_id => @topic.id), :class => "add_item" %>

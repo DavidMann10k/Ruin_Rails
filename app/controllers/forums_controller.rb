@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
   
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
-  before_filter :authorize, :only => [ :index, :new, :create, :edit, :update, :destroy, :dex_up ]
+  before_filter :admin_auth, :only => [ :index, :new, :create, :edit, :update, :destroy, :dex_up ]
   
   def new
     @division = Division.find(params[:division_id])

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
-  before_filter :authorize, :only => [ :destroy ]
+  before_filter :admin_auth, :only => [ :destroy ]
   
   def new
     @post = Post.new
@@ -19,6 +19,7 @@ class PostsController < ApplicationController
       @post.content = params[:post][:content]                    
       @post.topic_id = params[:topic_id]
       @post.user_id = current_user.id
+      @post.toggle(:publish)
       
       if @post.save
         @post.topic.touch
@@ -30,11 +31,6 @@ class PostsController < ApplicationController
       end
     end
   end
-
-  def touch 
-    updated_at_will_change! 
-    save 
-  end 
 
   def edit
     @post = Post.find(params[:id])
@@ -68,4 +64,13 @@ class PostsController < ApplicationController
       redirect_to topic_path, :id => topic_id
     end    
   end
+  
+  def toggle_publish
+    @post = Post.find(params[:id])
+    if admin? || current_user == @post.user
+      @post.toggle(:publish).save
+    end
+    redirect_to topic_path(@post.topic.id)
+  end
+  
 end

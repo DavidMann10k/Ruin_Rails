@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= user_from_session
   end
   
-  def current_user?(user)
-    user == current_user
-  end
-  
   def authenticate
     deny_access unless signed_in?
   end
@@ -28,7 +24,7 @@ class ApplicationController < ActionController::Base
     redirect_to signin_path, :notice => "Please sign for this action."
   end
   
-  def authorize
+  def admin_auth
     block_action unless admin?
   end
   

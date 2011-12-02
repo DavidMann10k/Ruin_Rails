@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
-  
+  include PostsHelper
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
-  before_filter :authorize, :only => [ :destroy ]
+  before_filter :admin_auth, :only => [ :destroy ]
   
   def new
     @topic = Topic.new
@@ -52,6 +52,7 @@ class TopicsController < ApplicationController
     end
       redirect_to forum_path(@topic.forum_id)
   end
+  
 
   def destroy
     begin

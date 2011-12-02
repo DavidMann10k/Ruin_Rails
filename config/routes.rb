@@ -8,6 +8,7 @@ RR::Application.routes.draw do
   match "/forums/:id/dex_up/" => "forums#dex_up"  
   resources :topics  
   resources :posts
+  match "posts/:id/toggle_publish" => "posts#toggle_publish"
   
 #user, session, authentication
   resources :users

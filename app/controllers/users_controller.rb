@@ -44,7 +44,11 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+    if admin?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
     @title = "users/#{@user.name}/edit"
   end
   
@@ -70,7 +74,7 @@ class UsersController < ApplicationController
     end
     
   end
-  
+    
   def show
     @user = User.find(params[:id])
     @title = User.find(params[:id]).name
