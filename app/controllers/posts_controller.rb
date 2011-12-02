@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
   before_filter :admin_auth, :only => [ :destroy ]
+  before_filter :admin_or_user_auth => [ :toggle_publish ]
   
   def new
     @post = Post.new
@@ -69,7 +70,10 @@ class PostsController < ApplicationController
   end
   
   def toggle_publish
-    Post.find(params[:id]).toggle(:publish).save
+    @post = Post.find(params[:id])
+    if (current_user == @post.user) || admin?
+      @post.toggle(:publish).save
+    end
     redirect_to :back
   end
   
