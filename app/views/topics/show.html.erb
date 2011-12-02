@@ -12,7 +12,6 @@
 							  	
 	<table>
 		<% @posts.each do |p| %>
-			<% if publish_post(p) %>
 				<tr class="item">
 					<td>
 						<% if !p.publish %><p id="unpublished">UNPUBLISHED</p><% end %>
@@ -27,7 +26,6 @@
 						</span>
 					</td>
 				</tr>
-			<% end %>
 		<% end %>
 	</table>
 	<%= link_to "+Post", new_post_path(:topic_id => @topic.id), :class => "add_item" %>

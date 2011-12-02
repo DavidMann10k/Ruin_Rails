@@ -1,5 +1,4 @@
 class TopicsController < ApplicationController
-  include PostsHelper
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
   before_filter :admin_auth, :only => [ :destroy ]
   
@@ -30,7 +29,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @posts = @topic.posts.order("created_at ASC")
+    @posts = @topic.posts.order("created_at ASC").select {|p| publish_post(p) }
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}"
   end
 
@@ -66,5 +65,12 @@ class TopicsController < ApplicationController
     ensure
       redirect_to forum_path, :id => forum_id
     end
+  end
+  
+  def publish_post(post)
+    return true if post.publish
+    return true if admin?
+    return true if post.user == current_user
+    return false
   end
 end
