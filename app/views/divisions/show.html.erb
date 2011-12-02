@@ -6,8 +6,8 @@
 		<sup><%= link_to "X", @division, 	:method => :delete,
 						  	  				:confirm => "Division and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
 						  	  				:title => "Delete #{@division.title}",
-						  	  				:class => "destroy" if admin? %></sup>
-		<sup><%= link_to "Edit", edit_division_path(@division.id), :class => "edit" if admin? %></sup>
+						  	  				:class => "destroy button" if admin? %></sup>
+		<sup><%= link_to "Edit", edit_division_path(@division.id), :class => "edit button" if admin? %></sup>
 	</h3>
 		
 	<table>
@@ -15,7 +15,7 @@
 			<tr class="item">
 				<td class="thin"><%= f.id if admin? %></td>
 				<td class="thin"><%= f.dex if admin? %></td>
-				<td><%= link_to f.title, :action => "show", :controller => "forums", :id => f.id %></td>
+				<td><%= link_to forum_path(f.id), :class => "item" do %><%= f.title %> <sub><%= f.topics.count %></sub><% end %></td>
 			</tr>
 		<% end %>
 	</table>

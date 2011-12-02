@@ -6,22 +6,25 @@
 		<sup><%= link_to "X", @topic, 	:method => :delete,
 						  	  				:confirm => "Topic and all child posts will be permanently and irrecoverably destroyed!  Are you sure?",
 						  	  				:title => "Delete #{@topic.title}",
-						  	  				:class => "destroy" if admin? %></sup>
-		<sup><%= link_to "Edit", edit_topic_path(@topic.id), :class => "edit" if admin? %></sup>
+						  	  				:class => "destroy button" if admin? %></sup>
+		<sup><%= link_to "Edit", edit_topic_path(@topic.id), :class => "edit button" if admin? %></sup>
 	</h3>
 							  	
 	<table>
-		<% @topic.posts.each do |p| %>
+		<% @posts.each do |p| %>
 			<% if publish_post(p) %>
-				<tr>
+				<tr class="item">
 					<td>
 						<% if !p.publish %><p id="unpublished">UNPUBLISHED</p><% end %>
 						<div class="content">
-							<%= link_to "-#{p.user.name}", user_path(p.user.id) %>
+							<%= link_to "-#{p.user.name}", user_path(p.user.id), :class => "user" %>
 							<%= simple_format(p.content) %>
 						</div><br/>
+						<span class="post">
 							<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
-							<%= link_to "P", {:controller => "posts", :action => "toggle_publish", :id => p.id}, :alt => "(un)Publish" if admin? || current_user?(p.user) %>
+							<%= link_to "P", {:controller => "posts", :action => "toggle_publish", :id => p.id}, :class => "publish button" if admin? || current_user?(p.user) %>
+							<%= link_to "E", {:controller => "posts", :action => "edit", :id => p.id}, :class => "edit button" if current_user?(p.user) %>
+						</span>
 					</td>
 				</tr>
 			<% end %>

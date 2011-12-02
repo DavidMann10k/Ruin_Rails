@@ -4,12 +4,12 @@
 		<h3 class="title">
 			<sup><%= d.id if admin? %> <%= d.dex if admin? %></sup>
 			<%= link_to d.title, :action => "show", :controller => "divisions", :id => d.id %>
-			<sup><%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => d.id}, :class => "up" if admin? %></sup>
+			<sup><%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => d.id}, :class => "up button" if admin? %></sup>
 			
 			<sup><%= link_to "X", d, 	:method => :delete,
 							  	  		:confirm => "Division and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
 							  	  		:title => "Delete #{d.title}",
-							  	  		:class => "destroy"  if admin?%></sup>
+							  	  		:class => "destroy button"  if admin?%></sup>
 		</h3>
 			
 		<table>
@@ -18,7 +18,8 @@
 				<tr class="item">
 					<td class="thin"><%= f.id if admin? %></td>
 					<td class="thin"><%= f.dex if admin? %></td>
-					<td><%= link_to f.title, forum_path(f.id) %></td>
+					<td><%= link_to forum_path(f.id), :class => "item" do %><%= f.title %> <sub><%= f.topics.count %></sub><% end %></td>
+					
 				</tr>
 			<% end %>
 		</table>

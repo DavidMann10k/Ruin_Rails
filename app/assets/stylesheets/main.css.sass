@@ -26,16 +26,29 @@
     color: $gre_2
     background: $red_2
     
-@mixin button
-  background: $gre_1
-  padding-top: 2px
-  padding-bottom: 2px
-  padding-left: 7px
-  padding-right: 7px
-  @include round(200px)
+@mixin user_link
+  @include round(10px)
+  display: block
+  font-size: 1.5em
+  padding: 5px
   &:hover
     background: $link
     color: $link_alt
+    
+@mixin button
+  background: $gre_1
+  border: 1px solid black
+  padding-top: 0px
+  padding-bottom: 0px
+  padding-left: 5px
+  padding-right: 5px
+  @include round(20px)
+  &:hover
+    background: $link
+    color: $link_alt
+    
+.button
+  @include button
 
 tbody tr.even td
   background: black
@@ -104,35 +117,20 @@ section
     background: $gre_2
     padding: 10px
     font-size: 2em
-  tr    
-    @include round
-    border: 1px solid green
-    padding: 2px
-    margin-top: 5px
-    margin-bottom: 5px
+  tr.item    
     td
       padding: 0px
-      a
-        @include round(10px)
-        display: block
-        font-size: 1.5em
-        padding: 5px
-        &:hover
-          background: $link
-          color: $link_alt
+      a.item
+        @include user_link
       div.content a
         float: right
   .time
-    @include round
-    padding: 2px
-    padding-left: 10px
-    padding-right: 10px
-    float: right
     color: $gre_3
-  .content
-    padding: 10px
+  span.post
+    float: right
     
-          
+.user
+  font-size: 1.5em
       
 .add_list
   @include cool_link
@@ -141,13 +139,9 @@ section
   
 .thin
   width: 10px
-  
-.up
-  @include button
-.destroy
-  @include button
-.edit
-  @include button
+
+a.user
+  @include user_link
   
 footer
   padding: 20px

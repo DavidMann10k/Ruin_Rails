@@ -8,4 +8,8 @@ class Post < ActiveRecord::Base
                       :presence => true
   belongs_to :topic
   belongs_to :user
+  
+  def edited?
+    !created_at == updated_at
+  end
 end

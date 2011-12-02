@@ -39,11 +39,14 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
+    new_post = duplicate_post(@post)
     
     if params[:commit] == "Cancel"
       redirect_to topic_path(@post.topic_id)
     else
-      if @post.update_attributes(params[:post])
+      @post.toggle(:publish).save
+      
+      if new_post.update_attributes(params[:post])
         flash[:success] = "Post updated successfully."
       else
         flash[:error] = "Post update failed."
@@ -73,4 +76,11 @@ class PostsController < ApplicationController
     redirect_to topic_path(@post.topic.id)
   end
   
+  private
+    
+    def duplicate_post(post)
+      new_post = post.dup
+      new_post.created_at = post.created_at
+      new_post
+    end
 end
