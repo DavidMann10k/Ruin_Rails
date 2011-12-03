@@ -3,7 +3,7 @@
 	<%= render 'shared/error_messages', :object => p.object %>
 	<div class="field">
 		<%= p.label :content %><br />
-		<%= p.text_field :content, :autofocus => true %>
+		<%= p.text_area :content, :autofocus => true %>
 	</div>
 	<%= hidden_field_tag(:topic_id, params[:topic_id]) %>
 	<div class="actions">

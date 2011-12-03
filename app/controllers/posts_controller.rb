@@ -32,6 +32,11 @@ class PostsController < ApplicationController
       end
     end
   end
+  
+  def show
+    @post = Post.find(params[:id])
+    @title = "#{@post.topic.forum.division.title}/#{@post.topic.forum.title}/#{@post.topic.title}/post by #{@post.user.name}}" 
+  end
 
   def edit
     @post = Post.find(params[:id])
@@ -45,7 +50,8 @@ class PostsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to topic_path(@post.topic_id)
     else
-      @post.toggle(:publish).save
+      #@post.toggle(:publish).save
+      @post.update_attributes(:publish => false)
       
       if new_post.update_attributes(params[:post])
         flash[:success] = "Post updated successfully."

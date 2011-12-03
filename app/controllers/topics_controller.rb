@@ -29,7 +29,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @posts = @topic.posts.order("created_at ASC").select {|p| publish_post(p) }
+    @posts = @topic.posts.order("created_at ASC, updated_at DESC").select {|p| publish_post(p) }
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}"
   end
 

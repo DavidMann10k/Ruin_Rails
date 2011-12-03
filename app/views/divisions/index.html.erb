@@ -4,12 +4,13 @@
 		<h3 class="title">
 			<sup><%= d.id if admin? %> <%= d.dex if admin? %></sup>
 			<%= link_to d.title, :action => "show", :controller => "divisions", :id => d.id %>
-			<sup><%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => d.id}, :class => "up button" if admin? %></sup>
+			<sup><%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => d.id}, :class => "up button", :title => "Move Up" if admin? %></sup>
 			
 			<sup><%= link_to "X", d, 	:method => :delete,
 							  	  		:confirm => "Division and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
 							  	  		:title => "Delete #{d.title}",
-							  	  		:class => "destroy button"  if admin?%></sup>
+							  	  		:class => "destroy button",
+							  	  		:title => "Destroy Division"  if admin?%></sup>
 		</h3>
 			
 		<table>
@@ -23,7 +24,7 @@
 				</tr>
 			<% end %>
 		</table>
-		<%= link_to "+Forum", {:controller => "forums", :action => "new", :division_id => d.id}, :class => "add_item" if admin? %>
+		<%= link_to "+Forum", {:controller => "forums", :action => "new", :division_id => d.id}, :class => "add_item", :title => "Create New Forum" if admin? %>
 	</div>
 <% end %>
-<%= link_to "+Division", "divisions/new", :class => "add_list" if admin? %>
+<%= link_to "+Division", "divisions/new", :class => "add_list", :title => "Create new Division" if admin? %>

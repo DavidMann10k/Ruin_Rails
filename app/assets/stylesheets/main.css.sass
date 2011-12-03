@@ -20,7 +20,8 @@
   padding-left: 15px
   padding-right: 15px
   margin: 2px
-  font-style: 1.3em
+  font-size: 1.5em
+  font-family: 'Contrail One', serif
   @include round(20px)
   &:hover
     color: $gre_2
@@ -67,6 +68,7 @@ header
   margin-top: 10px
   h1
     display: inline
+    margin-left: 10px
   a#logo
     color: $gre_2
   table
@@ -103,10 +105,9 @@ section
     margin-right: 15px
     
 #unpublished
-  margin: 5px
-  background: $red_2
-  color: $whi
-  text-align: center
+  float: right
+  a
+    @include button
   
 .list
   border: solid 3px $gre_2

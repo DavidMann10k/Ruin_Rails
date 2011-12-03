@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :topics
   has_many :posts
   
+  belongs_to :rank  
   
   attr_accessible :name, :email
   

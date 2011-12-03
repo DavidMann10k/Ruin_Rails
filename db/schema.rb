@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111202063848) do
+ActiveRecord::Schema.define(:version => 20111202225231) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(:version => 20111202063848) do
     t.boolean  "publish"
   end
 
+  create_table "ranks", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "topics", :force => true do |t|
     t.string   "title"
     t.integer  "forum_id"
@@ -61,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20111202063848) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rank",       :default => 0
   end
 
 end
