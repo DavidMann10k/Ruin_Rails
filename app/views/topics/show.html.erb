@@ -14,21 +14,29 @@
 	<table>
 		<% @posts.each do |p| %>
 				<tr class="item">
-					<td>
+					
 						<% if !p.publish %>
-						<span id="unpublished"><%= link_to "Unpublished Post", post_path(p.id) %> - <%= p.user.name %></span>
+							<td id="unpublished">
+								<%= link_to "Unpublished Post", post_path(p.id) %> - <%= p.user.name %>
+							</td>
 						<% else %>
-						<div class="content">
-							<%= link_to "-#{p.user.name}", user_path(p.user.id), :class => "user" %>
-							<%= simple_format(p.content) %>
-						</div><br/>
-						<span class="post">
-							<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
-							<%= link_to "P", {:controller => "posts", :action => "toggle_publish", :id => p.id}, :class => "publish button", :title => "(un)Publish" if admin? || current_user?(p.user) %>
-							<%= link_to "E", edit_post_path(p.id), :class => "edit button", :title => "Edit" if current_user?(p.user) %>
-						</span>
+							<td>
+								<div class="content">
+									<%= link_to "-#{p.user.name}", user_path(p.user.id), :class => "user" %>
+									<%= simple_format(p.content) %>
+								</div><br/>
+								<span class="post">
+									<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
+									<%= link_to "P", {  :controller => "posts",
+														:action => "toggle_publish",
+														:id => p.id},
+														:class => "publish button",
+														:title => "(un)Publish" if admin? || current_user?(p.user) %>
+									<%= link_to "E", edit_post_path(p.id), :class => "edit button", :title => "Edit" if current_user?(p.user) %>
+								</span>
+							</td>
 						<% end %>
-					</td>
+					
 				</tr>
 		<% end %>
 	</table>
