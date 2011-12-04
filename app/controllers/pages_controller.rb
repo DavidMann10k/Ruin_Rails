@@ -10,8 +10,4 @@ class PagesController < ApplicationController
   def about_ruin_rails
     @title = "about_ruin_rails"
   end
-  
-  def sign_in
-    @title = "sign_in"
-  end
 end
