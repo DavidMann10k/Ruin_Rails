@@ -8,10 +8,12 @@ class PostsController < ApplicationController
     @post = Post.new
     @topic = Topic.find(params[:topic_id])
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}/Posts/new"
+    return redirect_to topic_path(@topic.id) unless user_has_clearance?(@topic.forum.division.write_level)
   end
   
   def create
     @topic = Topic.find(params[:topic_id])
+    return redirect_to divisions_path unless user_has_clearance?(@topic.forum.division.read_level)
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}/Posts/new"
     if params[:commit] == "Cancel"
       redirect_to :controller => "topics", :action => "show", :id => @topic.id
@@ -35,23 +37,26 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    return redirect_to divisions_path unless user_has_clearance?(@post.topic.forum.division.write)
     @title = "#{@post.topic.forum.division.title}/#{@post.topic.forum.title}/#{@post.topic.title}/post by #{@post.user.name}}" 
   end
 
   def edit
     @post = Post.find(params[:id])
+    return redirect_to divisions_path unless user_has_clearance?(@post.topic.forum.division.write_level)
     @title = "#{@post.topic.forum.division.title}/#{@post.topic.forum.title}/#{@post.topic.title}/Post:#{@post.created_at}/edit"
   end
   
   def update
     @post = Post.find(params[:id])
+    return redirect_to divisions_path unless user_has_clearance?(@post.topic.forum.division.write_level)
     new_post = duplicate_post(@post)
     
     if params[:commit] == "Cancel"
       redirect_to topic_path(@post.topic_id)
     else
-      #@post.toggle(:publish).save
-      @post.update_attributes(:publish => false)
+      @post.publish = false
+      @post.save
       
       if new_post.update_attributes(params[:post])
         flash[:success] = "Post updated successfully."
@@ -80,7 +85,7 @@ class PostsController < ApplicationController
     if (current_user == @post.user) || admin?
       @post.toggle(:publish).save
     end
-    redirect_to :back
+    redirect_to topic_path(@post.topic)
   end
   
   private

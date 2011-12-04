@@ -6,6 +6,8 @@ class TopicsController < ApplicationController
     @topic = Topic.new
     @forum = Forum.find params[:forum_id]
     @title = "#{@forum.division.title}/#{@forum.title}/Topics/new"
+    
+    return redirect_to forum_path(@forum.id) unless user_has_clearance?(@forum.division.write_level)
   end
   
   def create
@@ -13,6 +15,7 @@ class TopicsController < ApplicationController
                          :forum_id  => params[:forum_id])
       @topic.user_id = current_user.id
       
+      return redirect_to forum_path(@topic.forum.id) unless user_has_clearance?(@topic.forum.division.write_level)
     if params[:commit] == "Cancel"
       redirect_to forum_path, id => params[:forum_id]
     else
@@ -29,17 +32,20 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    return redirect_to divisions_path unless user_has_clearance?(@topic.forum.division.read_level)
     @posts = @topic.posts.order("created_at ASC, updated_at DESC").select {|p| publish_post(p) }
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}"
   end
 
   def edit
     @topic = Topic.find(params[:id])
+    return redirect_to divisions_path unless user_has_clearance?(@topic.forum.division.write_level)
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}/edit"
   end
 
   def update
     @topic = Topic.find(params[:id])
+    return redirect_to divisions_path unless user_has_clearance?(@topic.forum.division.read_level)
     
     if params[:commit] == "Cancel"
       redirect_to forum_path(@topic.forum_id)

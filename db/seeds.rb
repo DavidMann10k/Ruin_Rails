@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+ranks = [{ :title => 'Registered', :clearance => 0 },{ :title => 'Guest', :clearance => 1 },{ :title => 'Member', :clearance => 2 }, { :title => 'Officer', :clearance => 3 }]
+
+ranks.each do |r|
+  rank = Rank.new
+  rank.title = r[:title]
+  rank.clearance = r[:clearance]
+  rank.save
+end

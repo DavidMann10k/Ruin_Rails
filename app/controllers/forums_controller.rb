@@ -29,7 +29,8 @@ class ForumsController < ApplicationController
   end
 
   def show
-    @forum = Forum.find(params[:id])
+    f = Forum.find(params[:id])
+    @forum = Forum.find(params[:id]) if user_has_clearance?(f.division.read_level)
     @title = "#{@forum.division.title}/#{@forum.title}"
   end
 

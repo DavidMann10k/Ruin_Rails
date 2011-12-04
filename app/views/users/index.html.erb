@@ -1,8 +1,12 @@
 <table>
+	<tr>
+		<th>Name</th>
+		<th><nobr>Access Rank</nobr></th>
+	</tr>
 	<% User.all.each do |u| %>
 		<tr>
-			<td class="small"><%= u.id %></td>
 			<td><%= link_to u.name, :action => "show", :controller => "users", :id => u.id %></td>
+			<td class="thin"><%= u.rank.title %></td>
 		</tr>
 	<% end %>
 </table>

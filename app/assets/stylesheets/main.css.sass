@@ -105,6 +105,7 @@ section
   
 .list
   border: 3px solid $gre_2
+  margin-top: 10px
   margin-bottom: 20px
   padding-bottom: 10px
   .title
@@ -122,17 +123,19 @@ section
       border-bottom: 3px double $gre_2
       border-top: 3px double $gre_2
       padding: 0px
-      a.item
-        @include user_link
-      div.content a
-        float: right
+  div.content
+    margin: 5px
+    margin-right: 15px
+    margin-left: 15px
   .time
     color: $gre_3
-  span.post
-    float: right
+span.post
+  float: right
     
 .user
   font-size: 1.5em
+  float: right
+  margin-left: 25px
       
 .add_list
   @include cool_link

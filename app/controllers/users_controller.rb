@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     else
         
       @user = User.new(params[:user])
+      @user.rank = Rank.find_by_title("Registered")
       if @user.save
         auth = @user.authentications.create!(:provider => params[:provider],
                                       :uid      => params[:uid],

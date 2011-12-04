@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :signed_in?, :admin?
+  helper_method :current_user, :signed_in?, :admin?, :user_has_clearance?
   
   def admin?
     current_user.admin
@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
   
   def block_action
     redirect_to root_path, :notice => "Not authorized for this action."
+  end
+
+  def user_has_clearance?(level)
+    current_user.rank.clearance >= level
   end
   
   private

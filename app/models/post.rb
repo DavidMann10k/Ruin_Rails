@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :content, :topic_id, :publish
+  attr_accessible :content, :topic_id
   
   validates :topic_id, :numericality => { :only_integer => true },
                        :presence => true

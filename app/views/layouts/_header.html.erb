@@ -9,7 +9,7 @@
 			</td>
 			<td id="account">
 				<% if signed_in? %>
-					<%= current_user.name %>
+					<%= current_user.name %> (<%= current_user.rank.title %>)
 					<%= link_to "Profile", :action => "show", :controller => "users", :id => current_user.id %>
 					<nobr><%= link_to "Sign Out", "/signout" %></nobr>
 				<% else %>

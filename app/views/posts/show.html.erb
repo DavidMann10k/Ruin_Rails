@@ -1,14 +1,20 @@
-<div class="content">
-	<%= simple_format(@post.content) %>
-	<%= link_to "-#{@post.user.name}", user_path(@post.user.id), :class => "user" %>
-</div><br/>
-
-<span class="post">
-	<span class="time">Updated: <%= @post.updated_at %></span>
-	<span class="time">Created: <%= @post.created_at %></span>
-	<%= link_to "P", {  :controller => "posts",
-						:action => "toggle_publish",
-						:id => @post.id }, 
-						:class => "publish button", 
-						:title => "(un)Publish" if admin? || current_user?(@post.user) %>
-</span>
+<div class="list">
+	<table>
+		<tr class="item">
+			<td>
+				<div class="content">
+					<%= link_to "-#{@post.user.name}", user_path(@post.user.id), :class => "user" %>
+					<%= simple_format(@post.content) %>
+				</div><br/>
+				<span class="post">
+					<span class="time">Updated: <%= @post.updated_at %></span> <span class="time">Created: <%= @post.created_at %></span>
+					<%= link_to "P", {  :controller => "posts",
+										:action => "toggle_publish",
+										:id => @post.id},
+										:class => "publish button",
+										:title => "(un)Publish" if admin? || current_user?(@post.user) %>
+				</span>
+			</td>
+		</tr>
+	</table>
+</div>
