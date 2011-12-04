@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_has_clearance?(level)
-    current_user.rank.clearance >= level
+    current_user.rank.clearance >= level.to_i
   end
   
   private
