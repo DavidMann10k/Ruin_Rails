@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   
   def deny_access
     store_location
-    redirect_to signin_path, :notice => "Please sign for this action."
+    redirect_to authenticate_path, :notice => "Please sign for this action."
   end
   
   def admin_auth

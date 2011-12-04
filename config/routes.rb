@@ -24,7 +24,6 @@ RR::Application.routes.draw do
 #root and pages
   root :to => 'pages#root'
   
-  match "/signin",           :to => "pages#sign_in"
   match "/about",            :to => "pages#about"
   match "/about_ruin_rails", :to => "pages#about_ruin_rails"
   
