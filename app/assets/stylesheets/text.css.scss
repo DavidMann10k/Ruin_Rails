@@ -13,10 +13,18 @@ h2 {
   font-family:'Contrail One', sans-serif;
   color:$title;
   margin:10px;
+  font-size: 2.5em
 }
 h3 {
   font-family:'Contrail One', sans-serif;
   color:$title;
+}
+h4 {
+  font-family: 'Open Sans', sans-serif;
+  color: $text;
+  margin: 0px;
+  text-align: center;
+  font-size: 1.5em
 }
 h6 {
   text-align:center;
