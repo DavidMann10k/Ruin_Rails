@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    return redirect_to divisions_path unless user_has_clearance?(@post.topic.forum.division.write)
+    return redirect_to divisions_path unless user_has_clearance?(@post.topic.forum.division.read_level)
     @title = "#{@post.topic.forum.division.title}/#{@post.topic.forum.title}/#{@post.topic.title}/post by #{@post.user.name}}" 
   end
 

@@ -27,7 +27,7 @@
     color: $gre_2
     background: $red_2
     
-@mixin user_link
+@mixin item_link
   @include round(10px)
   display: block
   font-size: 1.5em
@@ -113,12 +113,9 @@ section
     background: $gre_2
     padding: 10px
     font-size: 2em
-  tr.item
     td#unpublished
       text-align: right
       height: 20px
-      a
-        @include button
     td
       border-bottom: 3px double $gre_2
       border-top: 3px double $gre_2
@@ -131,7 +128,10 @@ section
     color: $gre_3
 span.post
   float: right
-    
+
+a.item
+  @include item_link
+
 .user
   font-size: 1.5em
   float: right
@@ -146,7 +146,7 @@ span.post
   width: 10px
 
 a.user
-  @include user_link
+  @include item_link
   
 footer
   padding: 20px
