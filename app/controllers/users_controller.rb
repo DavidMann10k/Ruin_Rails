@@ -81,4 +81,8 @@ class UsersController < ApplicationController
     @title = User.find(params[:id]).name
   end
   
+  def promote
+    
+  end
+  
 end

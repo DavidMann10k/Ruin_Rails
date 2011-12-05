@@ -1,6 +1,14 @@
+<% if @user.rank.clearance == 0 %>
+	<h4>Your access rank is "Registered" - an admin has been notified and will promote you appropriately.</h4>
+	<h4>You may view the <%= link_to "public forums", divisions_path %> until then.</h4>
+<% end %>
+
 <ul>
 	<li>Access Rank: <%= @user.rank.title %></li>
+	<li>Name: <%= @user.name %></li>
+	<li>Email: <%= @user.email %></li>
 </ul>
+
 <% if signed_in? && @user.id == current_user.id %>
-	<%= link_to "Edit My Details", :action => "edit", :controller => "users", :id => params[:id] %>
+	<%= link_to "Edit My Details", edit_user_path(params[:id]), :class => "cool_link" %>
 <% end %>

@@ -2,13 +2,13 @@
 	<%= render 'shared/error_messages', :object => f.object %>
 	<div class="field">
 		<%= f.label :name %><br />
-		<%= f.text_field :name %>
+		<%= f.text_field :name %><h4>This name will represent you everywhere on the site.</h4>
 	</div>
 	<div class="field">
 		<%= f.label :email %><br />
-		<%= f.text_field :email %>
+		<%= f.text_field :email %><h4>A valid email is required to confirm identity and retrieve a lost account.</h4>
 	</div>
-	<%= hidden_field_tag :uid, params[:uid] %>
+	<%= hidden_field_tag :uid, params[:uid] %> 
 	<%= hidden_field_tag :uname, params[:uname] %>
 	<%= hidden_field_tag :uemail, params[:uemail] %>
 	<%= hidden_field_tag :provider, params[:provider] %>
