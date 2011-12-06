@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :not_signed_in, :only => [:new, :create]
+  before_filter :admin_auth, :only => [ :promote, :demote ]
   
   def fake_name
     Faker::Name.name
@@ -82,7 +83,24 @@ class UsersController < ApplicationController
   end
   
   def promote
-    
+    @user = User.find(params[:id])
+    if @rank = Rank.find_by_clearance(@user.rank.clearance + 1)
+      @user.rank = @rank
+      @user.save
+    else
+      flash[:error] = "Cannot promote any further"
+    end
+    redirect_to users_path
   end
   
+  def demote
+    @user = User.find(params[:id])
+    if @rank = Rank.find_by_clearance(@user.rank.clearance - 1)
+      @user.rank = @rank
+      @user.save
+    else
+      flash[:error] = "Cannot demote any further!"
+    end
+    redirect_to users_path
+  end
 end

@@ -3,15 +3,17 @@ RR::Application.routes.draw do
 
 #forums
   resources :divisions
-  match "/divisions/:id/dex_up/" => "divisions#dex_up"  
+  match "/divisions/dex_up/:id/" => "divisions#dex_up"
   resources :forums
-  match "/forums/:id/dex_up/" => "forums#dex_up"  
+  match "/forums/dex_up/:id/" => "forums#dex_up" 
   resources :topics  
   resources :posts
   match "posts/:id/toggle_publish" => "posts#toggle_publish"
   
 #user, session, authentication
   resources :users
+  match "users/:action/:id" => "users#:action"
+  
   resources :authentications, :only => [:index, :create, :destroy]
   
   match '/auth/:service/callback', :to => 'authentications#auth_callback' 

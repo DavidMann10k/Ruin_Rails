@@ -1,8 +1,8 @@
 <%= link_to "/Divisions", divisions_path %>
 <% @divisions.each do |d| %>
 	<div class="list">
+			<sup>#<%= d.id if admin? %> d<%= d.dex if admin? %></sup>
 		<h3 class="title">
-			<sup><%= d.id if admin? %> <%= d.dex if admin? %></sup>
 			<%= link_to d.title, :action => "show", :controller => "divisions", :id => d.id %>
 			<sup><%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => d.id}, :class => "up button", :title => "Move Up" if admin? %></sup>
 			
@@ -17,8 +17,7 @@
 			<% d.forums.each do |f| %>
 				
 				<tr class="item">
-					<td class="thin"><%= f.id if admin? %></td>
-					<td class="thin"><%= f.dex if admin? %></td>
+					<td class="thin">#<%= f.id if admin? %> d<%= f.dex if admin? %></td>
 					<td><%= link_to forum_path(f.id), :class => "item" do %><%= f.title %> <sub><%= f.topics.count %></sub><% end %></td>
 					
 				</tr>

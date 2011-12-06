@@ -111,19 +111,24 @@ span.auth
   width: 64px
   display: inline-block
   text-align: center
-    
+
+
+
 form
   margin-left: auto
   margin-right: auto
   min-width: 300px
-  max-width: 600px
-  input#user_name
-    width: 300px - 15px
-  input#user_email
-    width: 300px - 15px
-  textarea#post_content
-    width: 95%
-    margin-left: 1.7%
+  max-width: 600px  
+  input, textarea
+    margin: 0px
+    padding: 0px
+    border-width: 0px
+    width: 100%
+    background-color: $gre_1
+  input.action
+    width: auto
+    @include cool_link
+    color: $link
   label
     font-size: 1.5em
     font-family: "Contrail One", sans-serif

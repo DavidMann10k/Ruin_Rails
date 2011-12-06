@@ -13,7 +13,7 @@
 					<%= link_to "Profile", :action => "show", :controller => "users", :id => current_user.id %>
 					<nobr><%= link_to "Sign Out", "/signout" %></nobr>
 				<% else %>
-					<%= link_to "Sign In / Register", "/authenticate" %>
+					<nobr><%= link_to "Sign In/Register", "/authenticate" %></nobr>
 				<% end %>
 			</td>
 		</tr>

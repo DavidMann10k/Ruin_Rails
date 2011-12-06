@@ -13,7 +13,7 @@
 	<%= hidden_field_tag :uemail, params[:uemail] %>
 	<%= hidden_field_tag :provider, params[:provider] %>
 	<div class="actions">
-		<%= f.submit "Register New Account" %>
-		<%= f.submit "Cancel" %>
+		<%= f.submit "Register New Account", :class => "action" %>
+		<%= f.submit "Cancel", :class => "action" %>
 	</div>
 <% end %>

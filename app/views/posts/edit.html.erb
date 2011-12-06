@@ -7,7 +7,7 @@
 	</div>
 	<%= hidden_field_tag(:topic_id, params[:topic_id]) %>
 	<div class="actions">
-		<%= p.submit "Confirm Editions" %>
-		<%= p.submit "Cancel" %>
+		<%= p.submit "Confirm Editions", :class => "action" %>
+		<%= p.submit "Cancel", :class => "action" %>
 	</div>
 <% end %>
