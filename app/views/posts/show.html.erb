@@ -1,3 +1,4 @@
+<%= link_to "/Divisions", divisions_path %> <%= link_to "/#{@post.topic.forum.division.title}", division_path(@post.topic.forum.division.id)%>  <%= link_to "/#{@post.topic.forum.title}", forum_path(@post.topic.forum.id) %> <%= link_to "/#{@post.topic.title}", topic_path(@post.topic.id) %>
 <div class="list">
 	<table>
 		<tr class="item">
