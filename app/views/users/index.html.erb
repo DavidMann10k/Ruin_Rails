@@ -7,8 +7,10 @@
 		<tr>
 			<td><%= link_to u.name, :action => "show", :controller => "users", :id => u.id %></td>
 			<td class="thin"><%= u.rank.title %></td>
-			<td class="thin"><%= link_to "^", { :controller => "users", :action => "promote", :id => u.id }, :class => "button", :title => "Promote" %></td>
-			<td class="thin"><%= link_to "v", { :controller => "users", :action => "demote", :id => u.id }, :class => "button", :title => "Promote" %></td>
+			<% if admin? %>
+				<td class="thin"><%= link_to "^", { :controller => "users", :action => "promote", :id => u.id }, :class => "button", :title => "Promote" %></td>
+				<td class="thin"><%= link_to "v", { :controller => "users", :action => "demote", :id => u.id }, :class => "button", :title => "Promote" %></td>
+			<% end %>
 		</tr>
 	<% end %>
 </table>
