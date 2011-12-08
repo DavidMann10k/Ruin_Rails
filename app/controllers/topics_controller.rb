@@ -17,7 +17,7 @@ class TopicsController < ApplicationController
       
       return redirect_to forum_path(@topic.forum.id) unless user_has_clearance?(@topic.forum.division.write_level)
     if params[:commit] == "Cancel"
-      redirect_to forum_path, id => params[:forum_id]
+      redirect_to forum_path(params[:forum_id])
     else
       
       if @topic.save
