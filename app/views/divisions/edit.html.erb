@@ -5,6 +5,14 @@
 		<%= d.label :title %><br />
 		<%= d.text_field :title, :autofocus => true %>
 	</div>
+	<div class="field">
+		<%= d.label :read_level %><br />
+		<%= d.text_field :read_level %>
+	</div>
+	<div class="field">
+		<%= d.label :write_level %><br />
+		<%= d.text_field :write_level %>
+	</div>
 	<div class="actions">
 		<%= d.submit "Confirm Editions", :class => "action" %>
 		<%= d.submit "Cancel", :class => "action" %>

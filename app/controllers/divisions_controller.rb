@@ -46,7 +46,10 @@ class DivisionsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to division_path(@division.id)
     else
-      if @division.update_attributes(params[:division])
+      @division.title = params[:division][:title]
+      @division.read_level = params[:division][:read_level]
+      @division.write_level = params[:division][:write_level]
+      if @division.save
         flash[:success] = "Division updated successfully."
         redirect_to division_path(@division.id)
       else

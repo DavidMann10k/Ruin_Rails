@@ -21,5 +21,5 @@
 		<% end %>
 	</table>
 	
-	<%= link_to "+Topic", new_topic_path(:forum_id => @forum.id), :class => "add_item", :title => "Create New Topic" %>
+	<%= link_to "+Topic", new_topic_path(:forum_id => @forum.id), :class => "add_item", :title => "Create New Topic" if current_user.rank.clearance >= @forum.division.write_level%>
 </div>
