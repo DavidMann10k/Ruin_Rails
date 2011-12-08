@@ -14,6 +14,8 @@ class TopicsController < ApplicationController
       @topic = Topic.new(:title     => params[:topic][:title],                    
                          :forum_id  => params[:forum_id])
       @topic.user_id = current_user.id
+      @forum = @topic.forum
+      @title = "#{@forum.division.title}/#{@forum.title}/Topics/new"
       
       return redirect_to forum_path(@topic.forum.id) unless user_has_clearance?(@topic.forum.division.write_level)
     if params[:commit] == "Cancel"
