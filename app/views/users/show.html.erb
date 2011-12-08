@@ -7,7 +7,9 @@
 <ul>
 	<li>Access Rank: <%= @user.rank.title %></li>
 	<li>Name: <%= @user.name %></li>
-	<li>Email: <%= @user.email %></li>
+	<% if @user.id == current_user.id %>
+		<li>Email: <%= @user.email %> <span class="emph">(hidden)</span></li>
+	<% end %>
 </ul>
 
 <% if signed_in? && @user.id == current_user.id %>
