@@ -41,3 +41,16 @@
 	</table>
 	<%= link_to "+Post", new_post_path(:topic_id => @topic.id), :class => "add_item", :tilte => "Create New Topic"  if current_user.rank.clearance >= @topic.forum.division.write_level %>
 </div>
+<% if current_user.rank.clearance >= @topic.forum.division.write_level %>
+	<%= form_for(@post) do |p| %>
+		<%= render 'shared/error_messages', :object => p.object %>
+		<div class="field">
+			<%= p.label :content %><br />
+			<%= p.text_area :content %>
+		</div>
+		<%= hidden_field_tag(:topic_id, @topic.id) %>
+		<div class="actions">
+			<%= p.submit "Post", :class => "action" %>
+		</div>
+	<% end %>
+<% end %>

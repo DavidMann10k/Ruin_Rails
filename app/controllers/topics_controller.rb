@@ -34,6 +34,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     return redirect_to divisions_path unless user_has_clearance?(@topic.forum.division.read_level)
     @posts = @topic.posts.order("created_at ASC, updated_at DESC").select {|p| publish_post(p) }
+    @post = Post.new
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}"
   end
 
