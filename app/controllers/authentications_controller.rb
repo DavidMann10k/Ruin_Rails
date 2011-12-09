@@ -23,7 +23,7 @@ class AuthenticationsController < ApplicationController
         session[:user_id] = auth.user.id
         session[:authentication_id] = auth.id
         flash[:notice] = "You've signed in as #{current_user.name}."
-        redirect_to :action => "show", :controller => "users", :id => auth.user.id
+        redirect_back_or auth.user
       else
         # new user - register - users#new
         flash[:notice] = "New authentication detected.  Continue to create new account."
