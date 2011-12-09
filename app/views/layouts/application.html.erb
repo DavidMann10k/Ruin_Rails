@@ -9,7 +9,7 @@
 	<body>
 		<% if signed_in? %>
 			<% if current_user.rank.clearance == 0 %>
-				<%= flash.now[:notice] = "Notice! Your access rank is 'Registered'; you do not have posting privileges until an admin has approved your account." %>
+				<% flash.now[:notice] = "Notice! Your access rank is 'Registered'; you do not have posting privileges until an admin has approved your account." %>
 			<% end %>
 		<% end %>
 		<%= render 'layouts/header' %>
