@@ -39,7 +39,8 @@
 				</tr>
 		<% end %>
 	</table>
-	<%= link_to "+Post", new_post_path(:topic_id => @topic.id), :class => "add_item", :tilte => "Create New Topic"  if current_user.rank.clearance >= @topic.forum.division.write_level %>
+	<%= paginate @posts %>	
+	<div class="add_item"><%= link_to "+Post", new_post_path(:topic_id => @topic.id), :class => "add_item", :tilte => "Create New Topic"  if current_user.rank.clearance >= @topic.forum.division.write_level %></div>
 </div>
 <% if current_user.rank.clearance >= @topic.forum.division.write_level %>
 	<%= form_for(@post) do |p| %>

@@ -39,9 +39,6 @@ class TopicsController < ApplicationController
     else
       @posts = Post.order("created_at ASC, updated_at DESC").where("topic_id = ? AND publish = ? OR user_id = ?", @topic.id, true, current_user.id).page(params[:page]).per(5)
     end
-    #@posts = Post.order("created_at ASC, updated_at DESC").where("publish = :true OR user_id = :user_id", {:true => true, :user_id => current_user.id} ).page(params[:page]).per(5)
-    #@posts = @topic.posts.order("created_at ASC, updated_at DESC").select {|p| publish_post(p) }
-    #@posts = Post.order("created_at ASC, updated_at DESC").where("topic_id = ?", @topic.id).select {|p| publish_post(p) }
     @post = Post.new
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}"
   end

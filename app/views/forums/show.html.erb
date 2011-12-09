@@ -14,7 +14,7 @@
 	<table>
 		<% @forum.topics.order("updated_at DESC").each do |t| %>
 			<tr class="item">
-				<td><%= link_to topic_path(t.id), :class => "item" do %><%= t.title %> <sub><%= t.posts.count %></sub><% end %></td>
+				<td><%= link_to topic_path(t.id), :class => "item" do %><%= t.title %> <sub><%= t.posts.publish.count %></sub><% end %></td>
 				<td class="thin"><nobr><%= link_to "-#{t.user.name}", user_path(t.user.id), :class => "user" %></nobr></td>
 				<td class="thin"><nobr>@<%= t.created_at %></nobr></td>
 			</tr>

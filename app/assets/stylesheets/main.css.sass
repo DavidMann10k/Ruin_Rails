@@ -111,7 +111,11 @@ span.auth
   display: inline-block
   text-align: center
 
-
+nav.pagination
+  float: right
+  padding: 5px
+  a
+    @include button
 
 form
   margin-left: auto
@@ -144,13 +148,10 @@ form
   #note
     text-align: center
     
-    
-
 .list
   border: 3px solid $gre_2
   margin-top: 10px
   margin-bottom: 20px
-  padding-bottom: 10px
   .title
     display: inline-block
     background: $gre_2
@@ -182,8 +183,11 @@ a.item
       
 .add_list
   @include cool_link
-.add_item
+  
+a.add_item
   @include cool_link
+div.add_item
+  padding-bottom: 10px
   
 .thin
   width: 10px
