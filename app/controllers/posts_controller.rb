@@ -26,7 +26,7 @@ class PostsController < ApplicationController
       if @post.save
         @post.topic.touch
         flash[:success] = "New post created successfully!"
-        redirect_to topic_path(@post.topic_id, @topic.posts.num_pages)
+        redirect_to topic_path(@post.topic_id)
       else
         flash[:error] = "Error in post creation process!"
         render 'new'
