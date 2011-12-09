@@ -6,6 +6,7 @@
 		<%= p.text_area :content, :autofocus => true %>
 	</div>
 	<%= hidden_field_tag(:topic_id, params[:topic_id]) %>
+	<div class="de-emph" id="note">(HTML enabled)</div>
 	<div class="actions">
 		<%= p.submit "Create Post", :class => "action" %>
 		<%= p.submit "Cancel", :class => "action" %>

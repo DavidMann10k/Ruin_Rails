@@ -21,10 +21,9 @@ class TopicsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to forum_path(params[:forum_id])
     else
-      
       if @topic.save
         flash[:success] = "Topic, #{@topic.title} created successfully!"
-        redirect_to :controller => "topics", :action => "show", :id => @topic.id
+        redirect_to topic_path(topic.id)
       else
         flash[:error] = "Error in topics creation process!"
         render 'new'
@@ -55,11 +54,12 @@ class TopicsController < ApplicationController
     else
       if @topic.update_attributes(params[:topic])
         flash[:success] = "Topic updated successfully."
+        redirect_to forum_path(@topic.forum_id)
       else
-        flash[:error] = "Tpoic update failed."
+        flash[:error] = "Topic update failed."
+        render edit_topic(params[:id])
       end
     end
-      redirect_to forum_path(@topic.forum_id)
   end
   
 

@@ -48,6 +48,7 @@
 			<%= p.label :content %><br />
 			<%= p.text_area :content %>
 		</div>
+	<div class="de-emph" id="note">(HTML enabled)</div>
 		<%= hidden_field_tag(:topic_id, @topic.id) %>
 		<div class="actions">
 			<%= p.submit "Post", :class => "action" %>
