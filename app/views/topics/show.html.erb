@@ -1,5 +1,5 @@
 <%= link_to "/Divisions", divisions_path %> <%= link_to "/#{@topic.forum.division.title}", division_path(@topic.forum.division.id)%>  <%= link_to "/#{@topic.forum.title}", forum_path(@topic.forum.id) %>
-<div class="list">
+<div class="list">	
 	<h3 class="title">
 		<sup><%= @topic.id if admin? %></sup>
 		<%= @topic.title %>			
@@ -9,7 +9,8 @@
 						  	  				:class => "destroy button",
 						  	  				:title => "Destroy" if admin? %></sup>
 		<sup><%= link_to "E", edit_topic_path(@topic.id), :class => "edit button", :title => "Edit" if admin? %></sup>
-	</h3>						  	
+	</h3>				
+	<%= paginate @posts %>	  	
 	<table>
 		<% @posts.each do |p| %>
 				<tr class="item">
