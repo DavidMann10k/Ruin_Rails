@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
     if admin?
       @posts = Post.order("created_at ASC, updated_at DESC").where("topic_id = ?", @topic.id).page(params[:page]).per(5)
     else
-      @posts = Post.order("created_at ASC, updated_at DESC").where("topic_id = ? AND publish = ? OR user_id = ?", @topic.id, true, current_user.id).page(params[:page]).per(5)
+      @posts = Post.order("created_at ASC, updated_at DESC").where("topic_id = :topic_id AND publish = :true OR user_id = :user_id AND topic_id = :topic_id", {:topic_id => @topic.id, :true => true, :user_id => current_user.id}).page(params[:page]).per(5)
     end
     @post = Post.new
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}"
@@ -52,7 +52,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find(params[:id])
     return redirect_to divisions_path unless user_has_clearance?(@topic.forum.division.read_level)
-    
+
     if params[:commit] == "Cancel"
       redirect_to forum_path(@topic.forum_id)
     else
