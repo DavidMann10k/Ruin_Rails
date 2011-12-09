@@ -9,6 +9,8 @@ class Post < ActiveRecord::Base
   belongs_to :topic
   belongs_to :user
   
+  scope :publish, where(:publish => true)
+  
   def edited?
     !created_at == updated_at
   end

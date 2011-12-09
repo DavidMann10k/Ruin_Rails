@@ -10,7 +10,7 @@
 						  	  				:title => "Destroy" if admin? %></sup>
 		<sup><%= link_to "E", edit_topic_path(@topic.id), :class => "edit button", :title => "Edit" if admin? %></sup>
 	</h3>
-							  	
+<%= will_paginate @posts %>							  	
 	<table>
 		<% @posts.each do |p| %>
 				<tr class="item">
