@@ -14,7 +14,7 @@ class ForumsController < ApplicationController
     @forum = Forum.new(:title => params[:forum][:title], 
                       :dex => new_forum_dex_for_div(params[:division_id]), 
                       :division_id => params[:division_id])
-                      
+    @division = @forum.division
     if params[:commit] == "Cancel"
       redirect_to divisions_path
     else

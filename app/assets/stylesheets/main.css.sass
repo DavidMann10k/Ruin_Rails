@@ -152,18 +152,20 @@ form
   border: 3px solid $gre_2
   margin-top: 10px
   margin-bottom: 20px
+  padding-bottom: 10px
   .title
     display: inline-block
     background: $gre_2
     padding: 10px
     font-size: 2em
-    td#unpublished
-      text-align: right
-      height: 20px
-    td
-      border-bottom: 3px double $gre_2
-      border-top: 3px double $gre_2
-      padding: 0px
+  td
+    border-bottom: 3px double $gre_2
+    border-top: 3px double $gre_2
+    padding: 0px
+  td#unpublished
+    text-align: center
+    a
+      @include button
   div.content
     margin: 5px
     margin-right: 15px
@@ -200,4 +202,3 @@ footer
   text-align: center
   border-bottom: 4px groove $gre_2
   @include round(30px)
-  
