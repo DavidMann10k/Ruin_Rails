@@ -13,5 +13,5 @@
 </ul>
 
 <% if signed_in? && @user.id == current_user.id %>
-	<%= link_to "Edit My Details", edit_user_path(params[:id]), :class => "cool_link" %>
+	<%= link_to "Edit Account", edit_user_path(params[:id]), :class => "cool_link" %>
 <% end %>
