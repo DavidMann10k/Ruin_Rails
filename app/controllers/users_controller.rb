@@ -32,9 +32,7 @@ class UsersController < ApplicationController
                                       :uid      => params[:uid],
                                       :uname    => params[:uname],
                                       :uemail   => params[:uemail])
-                                      
-        session[:user_id] = @user.id
-        session[:authentication_id] = auth.id
+        create_session(auth)
         flash[:success] = "Account created successfully!"
         #redirect_to @user
         redirect_to :action => "show", :controller => "users", :id => auth.user.id

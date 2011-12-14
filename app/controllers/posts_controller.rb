@@ -25,6 +25,8 @@ class PostsController < ApplicationController
       
       if @post.save
         @post.topic.touch
+        @post.topic.forum.touch
+        @post.topic.forum.division.touch
         flash[:success] = "New post created successfully!"
         redirect_to topic_path(@post.topic_id)
       else

@@ -25,7 +25,8 @@
 									<%= simple_format(p.content) %>
 								</div><br/>
 								<span class="post">
-									<span class="time">Updated: <%= p.updated_at %></span> <span class="time">Created: <%= p.created_at %></span>
+									<span class="time"><%=  "--Posted #{distance_of_time_in_words_to_now p.created_at} ago." %> -<%= "-Edited #{distance_of_time_in_words_to_now p.updated_at} ago." unless p.created_at == p.updated_at %>
+									</span>
 									<%= link_to "P", {  :controller => "posts",
 														:action => "toggle_publish",
 														:id => p.id},

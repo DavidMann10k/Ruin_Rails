@@ -148,6 +148,9 @@ form
   #note
     text-align: center
     
+a.item
+  @include item_link
+    
 .list
   border: 3px solid $gre_2
   margin-top: 10px
@@ -162,6 +165,12 @@ form
     border-bottom: 3px double $gre_2
     border-top: 3px double $gre_2
     padding: 0px
+    padding-right: 10px
+    padding-left: 10px
+  td.new
+    text-align: left
+  td#item
+    width: 50%
   td#unpublished
     text-align: center
     a
@@ -175,8 +184,6 @@ form
 span.post
   float: right
 
-a.item
-  @include item_link
 
 .user
   font-size: 1.5em

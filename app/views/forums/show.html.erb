@@ -14,9 +14,10 @@
 	<table>
 		<% @forum.topics.order("updated_at DESC").each do |t| %>
 			<tr class="item">
-				<td><%= link_to topic_path(t.id), :class => "item" do %><%= t.title %> <sub><%= t.posts.publish.count %></sub><% end %></td>
+				<td id="item"><%= link_to topic_path(t.id), :class => "item" do %><%= t.title %> <sub><%= t.posts.publish.count %></sub><% end %></td>
+				<td class="new emph"><%= "<--- Updated #{distance_of_time_in_words_to_now(t.updated_at)} ago" if new_content?(t.updated_at) %></td>
 				<td class="thin"><nobr><%= link_to "-#{t.user.name}", user_path(t.user.id), :class => "user" %></nobr></td>
-				<td class="thin"><nobr>@<%= t.created_at %></nobr></td>
+				<td class="thin"><nobr><%= "#{distance_of_time_in_words_to_now(t.created_at)} ago" %></nobr></td>
 			</tr>
 		<% end %>
 	</table>

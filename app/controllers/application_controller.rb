@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :current_user, :signed_in?, :admin?, :user_has_clearance?
-  
+  before_filter :touch_user
+
   def admin?
     current_user.admin
   end
@@ -41,6 +42,12 @@ class ApplicationController < ActionController::Base
     clear_return_to
   end
   
+  def create_session(auth)
+      session[:user_id] = auth.user.id
+      session[:authentication_id] = auth.id
+      current_user.update_attribute(:last_login, current_user.updated_at)
+  end
+  
   private
     def user_from_session
       User.find_by_id(session[:user_id]) if session[:user_id]
@@ -52,5 +59,12 @@ class ApplicationController < ActionController::Base
     
     def clear_return_to
       session[:return_to] = nil
+    end    
+    
+    def touch_user
+      begin
+        current_user.touch
+      rescue
+      end
     end
 end

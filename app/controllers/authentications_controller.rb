@@ -20,8 +20,7 @@ class AuthenticationsController < ApplicationController
     else
       if auth
         # existing user - sign in - sessions#new
-        session[:user_id] = auth.user.id
-        session[:authentication_id] = auth.id
+        create_session(auth)
         flash[:notice] = "You've signed in as #{current_user.name}."
         redirect_back_or auth.user
       else

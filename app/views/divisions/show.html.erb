@@ -1,24 +1,26 @@
 <%= link_to "/Divisions", divisions_path %>
 <div class="list">
 	<h3 class="title">
-		<sup><%= @division.id if admin? %> <%= @division.dex if admin? %></sup>
-		<%= @division.title %>			
-		<sup><%= link_to "X", @division, 	:method => :delete,
-						  	  				:confirm => "Division and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
-						  	  				:title => "Delete #{@division.title}",
-						  	  				:class => "destroy button",
-						  	  				:title => "Destroy Division" if admin? %></sup>
-		<sup><%= link_to "Edit", edit_division_path(@division.id), :class => "edit button", :title => "Edit Division" if admin? %></sup>
-	</h3>
 		
+		<%= link_to @division.title, :action => "show", :controller => "divisions", :id => @division.id %>
+		<%= link_to "^", { :controller => "divisions", :action => "dex_up", :id => @division.id}, :class => "up button", :title => "Move Up" if admin? %>
+		
+		<%= link_to "X", @division, 	:method => :delete,
+						  	  		:confirm => "Division and all child forums will be permanently and irrecoverably destroyed!  Are you sure?",
+						  	  		:title => "Delete #{@division.title}",
+						  	  		:class => "destroy button",
+						  	  		:title => "Destroy Division"  if admin?%>
+	</h3>
+		<%= "##{@division.id} d#{@division.dex}" if admin? %>
 	<table>
 		<% @division.forums.each do |f| %>
-			<tr class="item">
-				<td class="thin"><%= f.id if admin? %></td>
-				<td class="thin"><%= f.dex if admin? %></td>
-				<td><%= link_to forum_path(f.id), :class => "item" do %><%= f.title %> <sub><%= f.topics.count %></sub><% end %></td>
+			
+			<tr class="item">				
+				<td id="item"><%= link_to forum_path(f.id), :class => "item" do %><sup><sup><%= "##{f.id}d#{f.dex}" if admin? %></sup></sup><%= f.title %><% end %></td>
+				<td class="new emph"><%= "<--- Updated #{distance_of_time_in_words_to_now(f.updated_at)} ago" if new_content?(f.updated_at) %></td>
+				<td class="thin"><nobr><%= "#{f.topics.count} threads" %></nobr></td>
 			</tr>
 		<% end %>
 	</table>
-	<%= link_to "+Forum", new_forum_path(:division_id => @division.id), :class => "add_item", :title => "Create New Forum", :title => "Create New Forum" if admin? %>
+	<%= link_to "+Forum", new_forum_path(:division_id => @division.id), :class => "add_item", :title => "Create New Forum" if admin? %>
 </div>
