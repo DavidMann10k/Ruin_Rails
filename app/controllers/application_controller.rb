@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :signed_in?, :admin?, :user_has_clearance?
+  helper_method :current_user, :signed_in?, :admin?, :user_has_clearance?, :new_content?
   before_filter :touch_user
 
   def admin?
@@ -48,6 +48,9 @@ class ApplicationController < ActionController::Base
       current_user.update_attribute(:last_login, current_user.updated_at)
   end
   
+  def new_content?(datetime)
+    datetime > current_user.last_login
+  end
   private
     def user_from_session
       User.find_by_id(session[:user_id]) if session[:user_id]

@@ -15,8 +15,4 @@ module ApplicationHelper
   def current_user?(user)
     user == current_user
   end
-  
-  def new_content?(datetime)
-    datetime > current_user.last_login
-  end
 end
