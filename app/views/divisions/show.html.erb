@@ -17,7 +17,7 @@
 			
 			<tr class="item">				
 				<td id="item"><%= link_to forum_path(f.id), :class => "item" do %><sup><sup><%= "##{f.id}d#{f.dex}" if admin? %></sup></sup><%= f.title %><% end %></td>
-				<td class="new emph"><%= "<--- Updated #{distance_of_time_in_words_to_now(f.updated_at)} ago" if new_content?(f.updated_at) %></td>
+				<td class="new emph"><%= "<--- Updated #{distance_of_time_in_words_to_now(f.updated_at)} ago" if f.updated_at > current_user.last_login %></td>
 				<td class="thin"><nobr><%= "#{f.topics.count} threads" %></nobr></td>
 			</tr>
 		<% end %>
