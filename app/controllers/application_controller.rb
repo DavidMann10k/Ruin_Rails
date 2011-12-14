@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   end
   
   def new_content?(datetime)
-    datetime > current_user.last_login
+    datetime > current_user.last_login.to_datetime
   end
   private
     def user_from_session
