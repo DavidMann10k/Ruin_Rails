@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   
   def index
     @title = "users"
+    @users = User.order('name asc')
   end
   
   def new

@@ -3,7 +3,7 @@
 		<th>Name</th>
 		<th><nobr>Access Rank</nobr></th>
 	</tr>
-	<% User.all.each do |u| %>
+	<% @users.each do |u| %>
 		<tr>
 			<td><%= link_to u.name, :action => "show", :controller => "users", :id => u.id %></td>
 			<td class="thin"><%= u.rank.title %></td>
