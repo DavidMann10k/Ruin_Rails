@@ -12,33 +12,7 @@
 	</h3>				
 	<%= paginate @posts %>	
 	<table>
-		<% @posts.each do |p| %>
-				<tr class="item">
-						<% if !p.publish %>
-							<td id="unpublished">
-								<%= link_to "Unpublished Post", post_path(p.id) %> - <%= p.user.name %>
-							</td>
-						<% else %>
-							<td>
-								<div class="content">
-									<%= link_to "-#{p.user.name}", user_path(p.user.id), :class => "user" %>
-									<%= simple_format(p.content) %>
-								</div><br/>
-								<span class="post">
-									<span class="time"><%=  "--Posted #{distance_of_time_in_words_to_now p.created_at} ago." %> <%= "--Edited #{distance_of_time_in_words_to_now p.updated_at} ago." unless p.created_at == p.updated_at %>
-									</span>
-									<%= link_to "P", {  :controller => "posts",
-														:action => "toggle_publish",
-														:id => p.id},
-														:class => "publish button",
-														:title => "(un)Publish" if admin? || current_user?(p.user) %>
-									<%= link_to "E", edit_post_path(p.id), :class => "edit button", :title => "Edit" if current_user?(p.user) %>
-								</span>
-							</td>
-						<% end %>
-					
-				</tr>
-		<% end %>
+		<%= render :partial => '/shared/post', :collection => @posts %>
 	</table>
 	<%= paginate @posts %>	
 	<div class="add_item"><%= link_to "+Post", new_post_path(:topic_id => @topic.id), :class => "add_item", :tilte => "Create New Topic"  if current_user.rank.clearance >= @topic.forum.division.write_level %></div>

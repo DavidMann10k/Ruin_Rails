@@ -1,0 +1,24 @@
+<tr class="item">
+	<% if !post.publish %>
+		<td id="unpublished">
+			<%= link_to "Unpublished Post", post_path(post.id) %> - <%= post.user.name %>
+		</td>
+	<% else %>
+		<td>
+			<div class="content">
+				<%= link_to "-#{post.user.name}", user_path(post.user.id), :class => "user" %>
+				<%= simple_format(post.content) %>
+			</div><br/>
+			<span class="post">
+				<span class="time"><%=  "--Posted #{distance_of_time_in_words_to_now post.created_at} ago." %> <%= "--Edited #{distance_of_time_in_words_to_now post.updated_at} ago." unless post.created_at == post.updated_at %>
+				</span>
+				<%= link_to "P", {  :controller => "posts",
+									:action => "toggle_publish",
+									:id => post.id},
+									:class => "publish button",
+									:title => "(un)Publish" if admin? || current_user?(post.user) %>
+				<%= link_to "E", edit_post_path(post.id), :class => "edit button", :title => "Edit" if current_user?(post.user) %>
+			</span>
+		</td>
+	<% end %>		
+</tr>
