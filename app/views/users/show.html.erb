@@ -5,11 +5,12 @@
 <% end %>
 
 <ul>
-	<li>Access Rank: <%= @user.rank.title %></li>
 	<li>Name: <%= @user.name %></li>
-	<% if @user.id == current_user.id %>
+	<% if signed_in? && @user.id == current_user.id %>
 		<li>Email: <%= @user.email %> <span class="emph">(hidden)</span></li>
 	<% end %>
+	<li>Access Rank: <%= @user.rank.title %></li>
+	<li><%= "Member Since: #{@user.created_at.strftime('%B %d, %Y')}" %></li>
 </ul>
 
 <% if signed_in? && @user.id == current_user.id %>

@@ -5,8 +5,12 @@ class PostsController < ApplicationController
   before_filter :admin_or_user_auth => [ :toggle_publish ]
   def new
     @post = Post.new
+    @post.content = params[:content]
+    @post.user = current_user
+
     @topic = Topic.find(params[:topic_id])
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}/Posts/new"
+    
     return redirect_to topic_path(@topic.id) unless user_has_clearance?(@topic.forum.division.write_level)
   end
   
@@ -14,26 +18,32 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     return redirect_to divisions_path unless user_has_clearance?(@topic.forum.division.read_level)
     @title = "#{@topic.forum.division.title}/#{@topic.forum.title}/#{@topic.title}/Posts/new"
+    
     if params[:commit] == "Cancel"
       redirect_to :controller => "topics", :action => "show", :id => @topic.id
     else
-      @post = Post.new
-      @post.content = params[:post][:content]                    
-      @post.topic_id = params[:topic_id]
-      @post.user_id = current_user.id
-      @post.toggle(:publish)
-      
-      if @post.save
-        @post.topic.touch
-        @post.topic.forum.touch
-        @post.topic.forum.division.touch
-        flash[:success] = "New post created successfully!"
-        redirect_to topic_path(@post.topic_id)
+      if params[:commit] == "Preview Post"
+        redirect_to :action => "new", :content => params[:post][:content], :topic_id => params[:topic_id]
       else
-        flash[:error] = "Error in post creation process!"
-        render 'new'
+        @post = Post.new
+        @post.content = params[:post][:content]                    
+        @post.topic_id = params[:topic_id]
+        @post.user_id = current_user.id
+        @post.toggle(:publish)
+        
+        if @post.save
+          @post.topic.touch
+          @post.topic.forum.touch
+          @post.topic.forum.division.touch
+          flash[:success] = "New post created successfully!"
+          redirect_to topic_path(@post.topic_id)
+        else
+          flash[:error] = "Error in post creation process!"
+          render 'new'
+        end
       end
     end
+    
   end
   
   def show

@@ -1,3 +1,15 @@
+<div class="list">
+	<table>
+		<tr class="item">
+			<td>
+				<div class="content">
+					<%= link_to "-#{current_user.name}", user_path(current_user.id), :class => "user" %>
+					<%= simple_format(params[:content]) %>
+				</div>
+			</td>	
+		</tr>
+	</table>
+</div>
 
 <%= form_for(@post) do |p| %>
 	<%= render 'shared/error_messages', :object => p.object %>
@@ -9,6 +21,7 @@
 	<div class="de-emph" id="note">(HTML enabled)</div>
 	<div class="actions">
 		<%= p.submit "Create Post", :class => "action" %>
+		<%= p.submit "Preview Post", :class => "action" %>		
 		<%= p.submit "Cancel", :class => "action" %>
 	</div>
 <% end %>

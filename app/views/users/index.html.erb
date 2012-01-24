@@ -1,11 +1,13 @@
 <table>
 	<tr>
 		<th>Name</th>
+		<th><nobr>Member Since</nobr></th>
 		<th><nobr>Access Rank</nobr></th>
 	</tr>
 	<% @users.each do |u| %>
 		<tr>
 			<td><%= link_to u.name, :action => "show", :controller => "users", :id => u.id %></td>
+			<td><%= "#{u.created_at.strftime('%B %d, %Y')}" %></td>
 			<td class="thin"><%= u.rank.title %></td>
 			<% if signed_in? 
 				if admin? %>
