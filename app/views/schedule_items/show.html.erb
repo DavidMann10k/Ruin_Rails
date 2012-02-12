@@ -1,0 +1,6 @@
+<ul>
+	<li>User: <%= @schedule_item.user.name %></li>
+	<li>Day: <%= Date::DAYNAMES[@schedule_item.day] %></li>
+	<li>Start: <%= @schedule_item.start_hour %></li>
+	<li>Hours: <%= @schedule_item.duration %></li>
+</ul>

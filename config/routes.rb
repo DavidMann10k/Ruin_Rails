@@ -23,6 +23,8 @@ RR::Application.routes.draw do
   
   match "/register",         :to => "users#new"
   
+  resources :schedule_items
+  
 #root and pages
   root :to => 'pages#root'
   

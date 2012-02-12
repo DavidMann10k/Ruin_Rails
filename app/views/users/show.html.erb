@@ -13,6 +13,20 @@
 	<li><%= "Member Since: #{@user.created_at.strftime('%B %d, %Y')}" %></li>
 </ul>
 
+<h3>Availability</h3>
+<div class="">
+	<ul>
+		<% @user.schedule_items.each do |i| %>
+			<li>
+				id: <%= i.id %>, Day: <%= i.day %>, Start: <%= i.start_hour %>, Duration: <%= i.duration %>
+				<%= link_to "edit", edit_schedule_item_path(i.id), :class => "button" if current_user.id == i.user_id %>
+				<%= link_to "destroy", schedule_item_path(i), :action => "delete", :method => "delete", :class => "button" if current_user.id == i.user_id || admin? %>
+				
+			</li>
+		<% end %>
+	</ul>
+</div>
+
 <% if signed_in? && @user.id == current_user.id %>
 	<%= link_to "Edit Account", edit_user_path(params[:id]), :class => "cool_link" %>
 <% end %>

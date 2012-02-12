@@ -9,7 +9,7 @@
 						  	  				:class => "destroy button",
 						  	  				:title => "Destroy" if admin? %></sup>
 		<sup><%= link_to "E", edit_topic_path(@topic.id), :class => "edit button", :title => "Edit" if admin? %></sup>
-	</h3>				
+	</h3>
 	<%= paginate @posts %>	
 	<table>
 		<%= render :partial => '/shared/post', :collection => @posts %>
