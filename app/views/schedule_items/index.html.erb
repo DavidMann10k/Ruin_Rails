@@ -1,0 +1,20 @@
+<div class="list">
+	<% @items.each do |d| %>
+		<% if d.count > 0 %>
+		<h3><%= Date::DAYNAMES[d.first.day] %></h3>
+			<% d.each do |i| %>
+				<table>
+							<td><%= i.id %></td>
+							<td><%= link_to i.user.name, user_path(i.user.id) %></td>
+							<td class="de-emph"> is available</td>
+							<td><%= Date::DAYNAMES[i.day] %></td>
+							<td class="de-emph">@</td>
+							<td><%= translate_time(i.start_hour) %></td>
+							<td class="de-emph">for</td>
+							<td><%= i.duration %> hours</td>
+						</tr>
+				</table>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>

@@ -2,7 +2,20 @@ class ScheduleItemsController < ApplicationController
 
   before_filter :authenticate, :only => [ :new, :create, :show, :edit, :update, :destroy ]
 
+  def index
+    @sunday_items = ScheduleItem.where("day = '0'")
+    @monday_items = ScheduleItem.where("day = '1'")
+    @tuesday_items = ScheduleItem.where("day = '2'")
+    @wednesday_items = ScheduleItem.where("day = '3'")
+    @thursday_items = ScheduleItem.where("day = '4'")
+    @friday_items = ScheduleItem.where("day = '5'")
+    @saturday_items = ScheduleItem.where("day = '6'")
+    
+    @items = [@sunday_items, @monday_items, @tuesday_items, @wednesday_items, @thursday_items, @friday_items, @saturday_items]
+  end
+
   def new
+    @title = "new_availability"
     @schedule_item = ScheduleItem.new
   end
 
