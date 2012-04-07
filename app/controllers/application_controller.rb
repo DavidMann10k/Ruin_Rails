@@ -16,6 +16,14 @@ class ApplicationController < ActionController::Base
     @current_user ||= user_from_session
   end
   
+  def current_user?(user)
+    current_user == user
+  end
+  
+  def current_user_or_admin?(user)
+    current_user?(user) || admin?
+  end
+  
   def authenticate
     deny_access unless signed_in?
   end

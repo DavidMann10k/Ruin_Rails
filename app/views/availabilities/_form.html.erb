@@ -1,0 +1,29 @@
+<%= form_for(@availability) do |f| %>
+  <% if @availability.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@availability.errors.count, "error") %> prohibited this availability from being saved:</h2>
+
+      <ul>
+      <% @availability.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :day %><br />
+    <%= f.select(:day, [['Sunday', 0], ['Monday', 1], ['Tuesday', 2], ['Wednesday', 3], ['Thursday', 4], ['Friday', 5], ['Saturday', 6] ] ) %>
+  </div>
+  <div class="field">
+    <%= f.label :begin %><br />
+    <%= f.select(:begin, [['12am', 0], ['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12pm', 12], ['1', 13], ['2', 14], ['3', 15], ['4', 16], ['5', 17], ['6', 18], ['7', 19], ['8', 20], ['9', 21], ['10', 22], ['11', 23] ] ) %>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br />
+    <%= f.select(:end, [['12am', 0], ['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12pm', 12], ['1', 13], ['2', 14], ['3', 15], ['4', 16], ['5', 17], ['6', 18], ['7', 19], ['8', 20], ['9', 21], ['10', 22], ['11', 23] ] ) %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => "action" %>
+  </div>
+<% end %>

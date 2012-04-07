@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212212019) do
+ActiveRecord::Schema.define(:version => 20120406205816) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(:version => 20120212212019) do
     t.string   "uid"
     t.string   "uname"
     t.string   "uemail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "availabilities", :force => true do |t|
+    t.integer  "day"
+    t.time     "begin"
+    t.time     "end"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,15 +65,6 @@ ActiveRecord::Schema.define(:version => 20120212212019) do
     t.integer  "clearance",  :default => 0
   end
 
-  create_table "schedule_items", :force => true do |t|
-    t.integer  "day",        :limit => 255
-    t.integer  "start_hour"
-    t.integer  "duration"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
   create_table "topics", :force => true do |t|
     t.string   "title"
     t.integer  "forum_id"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120212212019) do
     t.datetime "updated_at"
     t.integer  "rank_id",    :default => 1
     t.datetime "last_login"
+    t.string   "timezone"
   end
 
 end

@@ -1,6 +1,8 @@
 RR::Application.routes.draw do
 
 
+  resources :availabilities
+
 #forums
   resources :divisions
   match "/divisions/dex_up/:id/" => "divisions#dex_up"
@@ -23,7 +25,6 @@ RR::Application.routes.draw do
   
   match "/register",         :to => "users#new"
   
-  resources :schedule_items
   
 #root and pages
   root :to => 'pages#root'

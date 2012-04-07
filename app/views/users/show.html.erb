@@ -12,21 +12,28 @@
 			<li>Email: <%= @user.email %> <span class="emph">(hidden)</span></li>
 		<% end %>
 		<li>Access Rank: <%= @user.rank.title %></li>
+		<li>Local Timezone: <%= @user.timezone %></li>
 		<li><%= "Member Since: #{@user.created_at.strftime('%B %d, %Y')}" %></li>
 	</ul>
 	<% if signed_in? && @user.id == current_user.id %>
-		<%= link_to "Edit Name/Email", edit_user_path(params[:id]), :class => "cool_link" %>
+		<%= link_to "Edit Account", edit_user_path(params[:id]), :class => "cool_link" %>
 	<% end %>
 </div>
 <div class="list">
 	<h3>Availability</h3>
 	<ul>
-		<% @user.schedule_items.each do |i| %>
+		<% @user.availabilities.each do |a| %>
 			<li>
-				<%= Date::DAYNAMES[i.day] %> @ <%= translate_time(i.start_hour) %> for <%= i.duration %> hours.
-				<%= link_to "destroy", schedule_item_path(i), :action => "delete", :method => "delete", :class => "button" if current_user.id == i.user_id || admin? if signed_in? %>
+				<p>
+				  	<b>Day:</b>
+				  	<%= Date::DAYNAMES[a.day] %> - 
+				  	<b>Begin:</b> <%= a.begin.strftime("%I:%M %p") %> - 
+				  	<b>End:</b> <%= a.end.strftime("%I:%M %p") %>   
+				  	<%= link_to "destroy", availability_path(a), :action => "delete", :method => "delete", :class => "button" if current_user.id == a.user_id || admin? if signed_in? %>
+				</p>
+				
 			</li>
 		<% end %>
 	</ul>
-	<%= link_to "Add Availability", new_schedule_item_path, :class => "cool_link"%>
+	<%= link_to "Add Availability", new_availability_path, :class => "cool_link"%>
 </div>

@@ -2,11 +2,11 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :topics
   has_many :posts
-  has_many :schedule_items
+  has_many :availabilities
   
   belongs_to :rank
   
-  attr_accessible :name, :email
+  attr_accessible :name, :email, :timezone
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   user_regex = /^\w+$/
