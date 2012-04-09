@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409191459) do
+ActiveRecord::Schema.define(:version => 20120409233352) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(:version => 20120409191459) do
   end
 
   create_table "availabilities", :force => true do |t|
-    t.integer  "day"
     t.datetime "begin"
     t.datetime "end"
     t.integer  "user_id"
@@ -50,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20120409191459) do
   end
 
   create_table "posts", :force => true do |t|
-    t.text     "content",    :limit => 255
+    t.text     "content"
     t.integer  "topic_id"
     t.integer  "user_id"
     t.datetime "created_at"
