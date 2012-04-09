@@ -30,12 +30,22 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities/new.json
   def new
     @title = "availability/new"
-    @availability = Availability.new
+    @availability = setup_availability(Availability.new)
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @availability }
     end
+  end
+  
+  def setup_availability(a)
+    a.begin = DateTime.new
+    a.begin = a.begin.change(:hour => 0, :minute => 0, :year => 2012, :month => 4, :day => 1)
+    a.end = DateTime.new
+    a.end = a.begin.change(:hour => 0, :minute => 0, :year => 2012, :month => 4, :day => 1)
+    
+    
+    return a
   end
 
   # GET /availabilities/1/edit
@@ -50,10 +60,11 @@ class AvailabilitiesController < ApplicationController
   def create
     @availability = Availability.new(params[:availability])
     @availability.user = current_user
+    @availability.begin = @availability.begin.change(:day => params[:begin][:day].to_i)
     
     respond_to do |format|
       if @availability.save
-        format.html { redirect_to :action => :index, notice: 'Availability was successfully created.' }
+        format.html { redirect_to user_path(current_user), notice: 'Availability was successfully created.' }
         format.json { render json: @availability, status: :created, location: @availability }
       else
         format.html { render action: "new" }
@@ -87,7 +98,7 @@ class AvailabilitiesController < ApplicationController
     @availability.destroy
 
     respond_to do |format|
-      format.html { redirect_to availabilities_url }
+      format.html { redirect_to user_path(current_user) }
       format.json { head :ok }
     end
   end

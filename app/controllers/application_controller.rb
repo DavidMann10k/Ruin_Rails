@@ -2,7 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :current_user, :signed_in?, :admin?, :user_has_clearance?, :new_content?
-  before_filter :touch_user
+  before_filter :touch_user, :set_user_time_zone
+
+  def set_user_time_zone
+    Time.zone = current_user.timezone if signed_in?
+  end
 
   def admin?
     current_user.admin
