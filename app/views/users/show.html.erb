@@ -22,18 +22,7 @@
 <div class="list">
 	<h3>Availability</h3>
 	<ul>
-		<% @user.availabilities.each do |a| %>
-			<li>
-				<p>
-				  	<b>Begin:</b> <%= Date::DAYNAMES[a.begin.wday] %>
-				  	<b>@</b> <%= a.begin.strftime("%I:%M %p") %> - 
-				  	<b>End: </b> <%= Date::DAYNAMES[a.end.wday] %>
-				  	<b>@</b> <%= a.end.strftime("%I:%M %p") %> - 
-				  	<%= link_to "destroy", availability_path(a), confirm: 'Are you sure?', :method => :delete, :class => "button" if current_user.id == a.user_id || admin? if signed_in? %>
-				</p>
-				
-			</li>
-		<% end %>
+		
 	</ul>
 	<%= link_to "Add Availability", new_availability_path, :class => "cool_link"%>
 </div>
