@@ -2,22 +2,28 @@
 
 <table>
   <tr>
-    <th>Day</th>
+    <th>User</th>
     <th>Begin</th>
     <th>End</th>
-    <th>User</th>
+    <th>Un</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
 <% @availabilities.each do |availability| %>
   <tr>
-    <td><%= Date::DAYNAMES[availability.day] %></td>
-    <td><%= availability.begin.strftime("%I:%M %p") %></td>
-    <td><%= availability.end.strftime("%I:%M %p") %></td>
-    <td><%= link_to User.find(availability.user_id).name, user_path(availability.user_id) %></td>
+    <td><%= availability.user_id %></td>
+    <td><%= availability.begin %></td>
+    <td><%= availability.end %></td>
+    <td><%= availability.un %></td>
+    <td><%= link_to 'Show', availability %></td>
+    <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
+    <td><%= link_to 'Destroy', availability, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Availability', new_availability_path, :class => "cool_link" %>
+<%= link_to 'New Availability', new_availability_path %>

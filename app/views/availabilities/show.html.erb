@@ -1,13 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Day:</b>
-  <%= Date::DAYNAMES[@availability.day] %> - 
-  <b>Begin:</b> <%= @availability.begin.strftime("%I:%M %p") %> - 
-  <b>End:</b> <%= @availability.end.strftime("%I:%M %p") %> - 
-  <b>User:</b> <%= link_to User.find(@availability.user_id).name, user_path(@availability.user_id) %>
+  <b>User:</b>
+  <%= @availability.user_id %>
+</p>
+
+<p>
+  <b>Begin:</b>
+  <%= @availability.begin %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @availability.end %>
+</p>
+
+<p>
+  <b>Un:</b>
+  <%= @availability.un %>
 </p>
 
 
-<%= link_to 'Edit', edit_availability_path(@availability), :class => "cool_link" %>
-<%= link_to 'Index', availabilities_path, :class => "cool_link" %>
+<%= link_to 'Edit', edit_availability_path(@availability) %> |
+<%= link_to 'Back', availabilities_path %>

@@ -1,11 +1,8 @@
 class Availability < ActiveRecord::Base
-  
   belongs_to :user
   
-  duration_regex = /^\d+$/
+  validate_presence_of :user_id, :begin, :end, :un
   
-  validates_presence_of :day, :begin, :end
-  
-  validates :day, :inclusion => { :in => -1..6 }
+  attr_accessible :begin, :end, :un
   
 end
