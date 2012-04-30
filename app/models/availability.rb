@@ -3,5 +3,5 @@ class Availability < ActiveRecord::Base
   
   attr_accessible :begin, :end, :un
   
-  validate_presence_of :user_id, :begin, :end, :un
+  validates_presence_of :user_id, :begin, :end
 end
