@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409233352) do
+ActiveRecord::Schema.define(:version => 20120410025353) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -24,9 +24,10 @@ ActiveRecord::Schema.define(:version => 20120409233352) do
   end
 
   create_table "availabilities", :force => true do |t|
+    t.integer  "user_id"
     t.datetime "begin"
     t.datetime "end"
-    t.integer  "user_id"
+    t.boolean  "un"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -80,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20120409233352) do
     t.datetime "updated_at"
     t.integer  "rank_id",    :default => 1
     t.datetime "last_login"
-    t.string   "timezone"
+    t.string   "time_zone"
   end
 
 end
