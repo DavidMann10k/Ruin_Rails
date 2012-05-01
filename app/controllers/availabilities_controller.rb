@@ -2,6 +2,7 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities
   # GET /availabilities.json
   def index
+    @title = "availabilities"
     @availabilities = Availability.order("begin asc")
 
     respond_to do |format|
@@ -14,6 +15,7 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities/1.json
   def show
     @availability = Availability.find(params[:id])
+    @title = "availability/#{@availability.user.name} "
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,6 +26,8 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities/new
   # GET /availabilities/new.json
   def new
+    
+    @title = "availabilities/new"
     @availability = Availability.new
 
     respond_to do |format|
@@ -35,6 +39,7 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities/1/edit
   def edit
     @availability = Availability.find(params[:id])
+    @title = "availabilities/edit"
     redirect_to availabilities_path unless @availability.user == current_user || admin?
   end
 

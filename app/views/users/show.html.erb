@@ -30,5 +30,5 @@
 		</tr>
 		<% end %> 
 	</table>
-	<%= link_to "Add Availability", new_availability_path, :class => "cool_link"%>
+	<%= link_to "Add Availability", new_availability_path, :class => "cool_link" if @user == current_user %>
 </div>
