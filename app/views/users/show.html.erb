@@ -21,8 +21,12 @@
 </div>
 <div class="list">
 	<h3>Availability</h3>
-	<ul>
-		
-	</ul>
+	<table>
+		<% @user.availabilities.each do |a| %>
+		<tr>
+			<td><span class="de-emph">From:</span> <%= a.begin.strftime('%A %l:%M %p') %></td><td><span class="de-emph">Until:</span> <%= a.end.strftime('%A %l:%M %p') %></td>
+		</tr>
+		<% end %> 
+	</table>
 	<%= link_to "Add Availability", new_availability_path, :class => "cool_link"%>
 </div>

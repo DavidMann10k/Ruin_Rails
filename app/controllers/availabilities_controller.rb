@@ -2,7 +2,7 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities
   # GET /availabilities.json
   def index
-    @availabilities = Availability.all
+    @availabilities = Availability.order("begin asc")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,12 +35,18 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities/1/edit
   def edit
     @availability = Availability.find(params[:id])
+    redirect_to availabilities_path unless @availability.user == current_user || admin?
   end
 
   # POST /availabilities
   # POST /availabilities.json
   def create
     @availability = Availability.new(params[:availability])
+    @availability.user= current_user
+    
+
+    @availability.begin = @availability.begin.change(:day => params[:availability][:begin], :month => 4, :year => 2012)
+    @availability.end = @availability.end.change(:day => params[:availability][:end], :month => 4, :year => 2012)
 
     respond_to do |format|
       if @availability.save
@@ -57,15 +63,17 @@ class AvailabilitiesController < ApplicationController
   # PUT /availabilities/1.json
   def update
     @availability = Availability.find(params[:id])
-
-    respond_to do |format|
-      if @availability.update_attributes(params[:availability])
-        format.html { redirect_to @availability, notice: 'Availability was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @availability.errors, status: :unprocessable_entity }
-      end
+    
+    redirect_to availabilities_path unless @availability.user == current_user || admin?
+    
+    @availability.begin = @availability.begin.change(:day => params[:availability][:begin])
+    @availability.end = @availability.end.change(:day => params[:availability][:end])
+    
+    if @availability.save
+      redirect_to @availability, notice: 'Availability was successfully updated.'
+    else
+      render action: "edit"
+      render json: @availability.errors, status: :unprocessable_entity
     end
   end
 
@@ -73,6 +81,7 @@ class AvailabilitiesController < ApplicationController
   # DELETE /availabilities/1.json
   def destroy
     @availability = Availability.find(params[:id])
+    redirect_to availabilities_path unless @availability.user == current_user || admin?
     @availability.destroy
 
     respond_to do |format|

@@ -12,16 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
     <%= f.label :begin %><br />
-    <%= f.datetime_select :begin %>
+    <%= f.select(:begin, [["Sunday", 1], ["Monday", 2], ["Tuesday", 3], ["Wednesday", 4], ["Thursday", 5], ["Friday", 6], ["Saturday", 7]]) %>
+    <%= f.datetime_select :begin, :ampm => true, :order => [:hour, :minute] %>
   </div>
   <div class="field">
     <%= f.label :end %><br />
-    <%= f.datetime_select :end %>
+    <%= f.select(:end, [["Sunday", 1], ["Monday", 2], ["Tuesday", 3], ["Wednesday", 4], ["Thursday", 5], ["Friday", 6], ["Saturday", 7]]) %>
+    <%= f.time_select :end, :ampm => true %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -2,17 +2,17 @@
 
 <p>
   <b>User:</b>
-  <%= @availability.user_id %>
+  <%= link_to @availability.user.name, user_path(@availability.user)  %>
 </p>
 
 <p>
   <b>Begin:</b>
-  <%= @availability.begin %>
+  <%= @availability.begin.strftime('%A %l:%M %p') %>
 </p>
 
 <p>
   <b>End:</b>
-  <%= @availability.end %>
+  <%= @availability.end.strftime('%A %l:%M %p') %>
 </p>
 
 <%= link_to 'Edit', edit_availability_path(@availability) %> |

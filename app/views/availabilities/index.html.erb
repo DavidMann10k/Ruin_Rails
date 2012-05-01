@@ -5,19 +5,13 @@
     <th>User</th>
     <th>Begin</th>
     <th>End</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @availabilities.each do |availability| %>
   <tr>
-    <td><%= availability.user_id %></td>
-    <td><%= availability.begin %></td>
-    <td><%= availability.end %></td>
-    <td><%= link_to 'Show', availability %></td>
-    <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
-    <td><%= link_to 'Destroy', availability, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to availability.user.name, user_path(availability.user) %></td>
+    <td><%= availability.begin.strftime('%A %l:%M %p') %></td>
+    <td><%= availability.end.strftime('%A %l:%M %p') %></td>
   </tr>
 <% end %>
 </table>

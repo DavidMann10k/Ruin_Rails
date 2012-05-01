@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   
   before_filter :authenticate, :only => [ :index, :new, :create, :show, :edit, :update, :destroy ]
   before_filter :admin_auth, :only => [ :destroy ]
-  before_filter :admin_or_user_auth => [ :toggle_publish ]
+
   def new
     @post = Post.new
     @post.content = params[:content]
