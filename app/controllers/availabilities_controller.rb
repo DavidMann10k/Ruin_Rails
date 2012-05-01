@@ -55,7 +55,7 @@ class AvailabilitiesController < ApplicationController
 
     respond_to do |format|
       if @availability.save
-        format.html { redirect_to @availability, notice: 'Availability was successfully created.' }
+        format.html { redirect_to @availability.user, notice: 'Availability was successfully created.' }
         format.json { render json: @availability, status: :created, location: @availability }
       else
         format.html { render action: "new" }
