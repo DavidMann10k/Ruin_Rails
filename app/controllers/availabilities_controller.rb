@@ -66,6 +66,7 @@ class AvailabilitiesController < ApplicationController
     
     redirect_to availabilities_path unless @availability.user == current_user || admin?
     
+    @availability.update_attributes(params[:availability])
     @availability.begin = @availability.begin.change(:day => params[:availability][:begin])
     @availability.end = @availability.end.change(:day => params[:availability][:end])
     
