@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :topics
   has_many :posts
-  has_many :availabilities
+  has_many :availabilities, :dependent => :destroy
   
   belongs_to :rank
   

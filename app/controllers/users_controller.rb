@@ -79,6 +79,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = User.find(params[:id]).name
+    @availabilities = Availability.where('user_id = ?', @user.id).order("begin ASC")
   end
   
   def promote
