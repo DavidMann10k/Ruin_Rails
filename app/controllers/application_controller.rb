@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    current_user.admin
+    if signed_in?
+      return current_user.admin
+    end
+    return false
   end
   
   def signed_in?

@@ -26,7 +26,7 @@
 		<tr>
 			<td><span class="de-emph">From:</span> <%= a.begin.strftime('%A %l:%M %p') %></td>
 			<td><span class="de-emph">Until:</span> <%= a.end.strftime('%A %l:%M %p') %></td>
-			<td><%= link_to "X", a, :method => :delete, :class => "destroy button", :title => "Delete Availability" if admin? || a.user = current_user %></td>
+			<td><%= link_to "X", a, :method => :delete, :class => "destroy button", :title => "Delete Availability" if admin? || a.user == current_user %></td>
 		</tr>
 		<% end %> 
 	</table>

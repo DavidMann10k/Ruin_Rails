@@ -1,4 +1,7 @@
-<div class="mini_nav"><%= link_to "Availabilities", availabilities_path %></div>
+
+<% if signed_in? %>
+	<div class="mini_nav"><%= link_to "Availabilities", availabilities_path %></div>
+<% end %>
 
 <table>
 	<tr>

@@ -1,11 +1,61 @@
-<div class="mini_nav"><%= link_to 'New Availability', new_availability_path %></div>
+
+<% if signed_in? %>
+	<div class="mini_nav"><%= link_to 'New Availability', new_availability_path %></div>
+<% end %>
+<table>
+	<tr>
+		<th>
+			Sunday
+		</th>
+		<th>
+			Monday
+		</th>
+		<th>
+			Tuesday
+		</th>
+		<th>
+			Wednesday
+		</th>
+		<th>
+			Thursday
+		</th>
+		<th>
+			Friday
+		</th>
+		<th>
+			Saturday
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<%= @sun_num %>
+		</td>
+		<td>
+			<%= @mon_num %>
+		</td>
+		<td>
+			<%= @tue_num %>
+		</td>
+		<td>
+			<%= @wed_num %>
+		</td>
+		<td>
+			<%= @thu_num %>
+		</td>
+		<td>
+			<%= @fri_num %>
+		</td>
+		<td>
+			<%= @sat_num %>
+		</td>
+	</tr>
+</table>
 <table>
   <tr>
     <th>User</th>
     <th>Begin</th>
     <th>End</th>
   </tr>
-
 <% @availabilities.each do |availability| %>
   <tr>
     <td><%= link_to availability.user.name, user_path(availability.user) %></td>
@@ -14,6 +64,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-

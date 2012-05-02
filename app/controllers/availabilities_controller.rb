@@ -4,6 +4,17 @@ class AvailabilitiesController < ApplicationController
   def index
     @title = "availabilities"
     @availabilities = Availability.order("begin asc")
+    
+    date = DateTime.now
+    date = date.change(:year => 2012, :month => 4, :day => 1, :hour => 0, :minute => 0, :second => 0)
+
+    @sun_num = @availabilities.where(:begin => date...(date+1.day)).size + @availabilities.where(:begin => (date+7.day)...(date+8.day)).size
+    @mon_num = @availabilities.where(:begin => (date.+1.day)...(date+2.day)).size
+    @tue_num = @availabilities.where(:begin => (date+2.day)...(date+3.day)).size
+    @wed_num = @availabilities.where(:begin => (date+3.day)...(date+4.day)).size
+    @thu_num = @availabilities.where(:begin => (date+4.day)...(date+5.day)).size
+    @fri_num = @availabilities.where(:begin => (date+5.day)...(date+6.day)).size
+    @sat_num = @availabilities.where(:begin => (date+6.day)...(date+7.day)).size + @availabilities.where(:begin => (date-1.day)...date).size
 
     respond_to do |format|
       format.html # index.html.erb
@@ -87,11 +98,12 @@ class AvailabilitiesController < ApplicationController
   # DELETE /availabilities/1.json
   def destroy
     @availability = Availability.find(params[:id])
+    @user = @availability.user
     redirect_to availabilities_path unless @availability.user == current_user || admin?
     @availability.destroy
 
     respond_to do |format|
-      format.html { redirect_to availabilities_url }
+      format.html { redirect_to @user }
       format.json { head :ok }
     end
   end
