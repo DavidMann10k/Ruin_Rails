@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_create :downcase_email
+  
   has_many :authentications, :dependent => :destroy
   has_many :topics
   has_many :posts
@@ -24,4 +26,9 @@ class User < ActiveRecord::Base
   def fake_name
     Faker::Name.name
   end
+  
+  private
+    def downcase_email
+      self.email.downcase!
+    end
 end
