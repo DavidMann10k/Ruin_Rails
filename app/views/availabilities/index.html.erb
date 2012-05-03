@@ -2,6 +2,20 @@
 <% if signed_in? %>
 	<div class="mini_nav"><%= link_to 'New Availability', new_availability_path %></div>
 <% end %>
+<% if admin? %>
+	<ul>
+		<li>date_1: <%= @date.in_time_zone(current_user.time_zone) %></li>
+		<li>date_2: <%= @date_2 %></li>
+		<li>date_3: <%= @date_3 %></li>
+		<li>date_4: <%= @date_4 %></li>
+		<li>date_5: <%= @date_5 %></li>
+		<li>date_6: <%= @date_6 %></li>
+		<li>date_7: <%= @date_7 %></li>
+	</ul>
+	
+	<p>User zone: <%= ActiveSupport::TimeZone.new(@current_user.time_zone).to_s %></p>
+	<p>Time.zone: <%= Time.zone %></p>
+<% end %>
 <table>
 	<tr>
 		<th>
@@ -51,16 +65,17 @@
 	</tr>
 </table>
 <table>
-  <tr>
-    <th>User</th>
-    <th>Begin</th>
-    <th>End</th>
-  </tr>
 <% @availabilities.each do |availability| %>
   <tr>
     <td><%= link_to availability.user.name, user_path(availability.user) %></td>
-    <td><%= availability.begin.strftime('%A %l:%M %p') %></td>
+    <td><%= availability.begin.in_time_zone(current_user.time_zone).strftime('%A %l:%M %p') %></td>
+    <% if admin? %>
+    	<td><%= availability.begin.in_time_zone(current_user.time_zone) %></td>
+    <% end %>
     <td><%= availability.end.strftime('%A %l:%M %p') %></td>
+    <% if admin? %>
+    	<td><%= availability.end %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

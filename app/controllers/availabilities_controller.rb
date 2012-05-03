@@ -5,9 +5,8 @@ class AvailabilitiesController < ApplicationController
     @title = "availabilities"
     @availabilities = Availability.order("begin asc")
     
-    date = DateTime.now
-    date = date.change(:year => 2012, :month => 4, :day => 1, :hour => 0, :minute => 0, :second => 0)
-
+    date = DateTime.now.in_time_zone(current_user.time_zone)
+     
     @sun_num = @availabilities.where(:begin => date...(date+1.day)).size + @availabilities.where(:begin => (date+7.day)...(date+8.day)).size
     @mon_num = @availabilities.where(:begin => (date.+1.day)...(date+2.day)).size
     @tue_num = @availabilities.where(:begin => (date+2.day)...(date+3.day)).size
