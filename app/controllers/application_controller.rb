@@ -1,11 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :signed_in?, :admin?, :user_has_clearance?, :new_content?
+  helper_method :current_user, :signed_in?, :admin?, :user_has_clearance?, :new_content?, :time_zone
   before_filter :touch_user, :set_user_time_zone
 
+  def time_zone
+    if (signed_in?)
+      current_user.time_zone
+    else
+      ActiveSupport::TimeZone.new("Central Time (US and Canada)")
+    end
+  end
+
   def set_user_time_zone
-    Time.zone = current_user.time_zone if signed_in?
+    Time.zone = time_zone
   end
 
   def admin?

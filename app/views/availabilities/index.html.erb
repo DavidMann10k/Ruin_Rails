@@ -4,7 +4,7 @@
 <% end %>
 <% if admin? %>
 	<ul>
-		<li>date_1: <%= @date.in_time_zone(current_user.time_zone) %></li>
+		<li>date_1: <%= @date %></li>
 		<li>date_2: <%= @date_2 %></li>
 		<li>date_3: <%= @date_3 %></li>
 		<li>date_4: <%= @date_4 %></li>
@@ -12,6 +12,9 @@
 		<li>date_6: <%= @date_6 %></li>
 		<li>date_7: <%= @date_7 %></li>
 	</ul>
+	
+	<p>User zone: <%= ActiveSupport::TimeZone.new(time_zone).to_s %></p>
+	<p>Time.zone: <%= Time.zone %></p>
 <% end %>
 <table>
 	<tr>
@@ -65,9 +68,9 @@
 <% @availabilities.each do |availability| %>
   <tr>
     <td><%= link_to availability.user.name, user_path(availability.user) %></td>
-    <td><%= availability.begin.in_time_zone(current_user.time_zone).strftime('%A %l:%M %p') %></td>
+    <td><%= availability.begin.in_time_zone(time_zone).strftime('%A %l:%M %p') %></td>
     <% if admin? %>
-    	<td><%= availability.begin.in_time_zone(current_user.time_zone) %></td>
+    	<td><%= availability.begin.in_time_zone(time_zone) %></td>
     <% end %>
     <td><%= availability.end.strftime('%A %l:%M %p') %></td>
     <% if admin? %>
