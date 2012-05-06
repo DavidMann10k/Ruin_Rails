@@ -4,31 +4,5 @@
 	<h4>You may view the <%= link_to "public forums", divisions_path %> until then.</h4>
 <% end %>
 
-<div class="list">
-	<h3>Information</h3>
-	<ul>
-		<li>Name: <%= @user.name %></li>
-		<% if signed_in? && @user.id == current_user.id %>
-			<li>Email: <%= @user.email %> <span class="emph">(hidden)</span></li>
-		<% end %>
-		<li>Access Rank: <%= @user.rank.title %></li>
-		<li>Local Timezone: <%= @user.time_zone %></li>
-		<li><%= "Member Since: #{@user.created_at.strftime('%B %d, %Y')}" %></li>
-	</ul>
-	<% if signed_in? && @user.id == current_user.id %>
-		<%= link_to "Edit Account", edit_user_path(params[:id]), :class => "cool_link" %>
-	<% end %>
-</div>
-<div class="list">
-	<h3>Availability</h3>
-	<table>
-		<% @availabilities.each do |a| %>
-		<tr>
-			<td><span class="de-emph">From:</span> <%= a.begin.strftime('%A %l:%M %p') %></td>
-			<td><span class="de-emph">Until:</span> <%= a.end.strftime('%A %l:%M %p') %></td>
-			<td><%= link_to "X", a, :method => :delete, :class => "destroy button", :title => "Delete Availability" if admin? || a.user == current_user %></td>
-		</tr>
-		<% end %> 
-	</table>
-	<%= link_to "Add Availability", new_availability_path, :class => "cool_link" if @user == current_user %>
-</div>
+<%= render 'user_info' %>
+<%= render 'user_availabilities' %>

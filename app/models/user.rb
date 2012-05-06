@@ -23,6 +23,9 @@ class User < ActiveRecord::Base
                     
   validates :time_zone, :presence   => true
 
+  scope :by_name, order('name ASC')
+  scope :by_date, order('created_on ASC')
+
   def fake_name
     Faker::Name.name
   end

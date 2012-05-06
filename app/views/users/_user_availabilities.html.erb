@@ -1,0 +1,13 @@
+<div class="list">
+	<h3>Availability</h3>
+	<table>
+		<% @availabilities.each do |a| %>
+		<tr>
+			<td><span class="de-emph">From:</span> <%= a.begin.strftime('%A %l:%M %p') %></td>
+			<td><span class="de-emph">Until:</span> <%= a.end.strftime('%A %l:%M %p') %></td>
+			<td><%= link_to "X", a, :method => :delete, :class => "destroy button", :title => "Delete Availability" if admin? || a.user == current_user %></td>
+		</tr>
+		<% end %> 
+	</table>
+	<%= link_to "Add Availability", new_availability_path, :class => "cool_link" if @user == current_user %>
+</div>

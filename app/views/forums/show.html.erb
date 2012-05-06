@@ -12,7 +12,7 @@
 	</h3>
 
 	<table>
-		<% @forum.topics.order("updated_at DESC").each do |t| %>
+		<% @topics.each do |t| %>
 			<tr class="item">
 				<td id="item"><%= link_to topic_path(t.id), :class => "item" do %><%= t.title %> <sub><%= t.posts.publish.count %></sub><% end %></td>
 				<td class="new emph"><%= "<--- Updated #{distance_of_time_in_words_to_now(t.updated_at)} ago" if t.updated_at > current_user.last_login %></td>

@@ -9,8 +9,12 @@ class Post < ActiveRecord::Base
   belongs_to :topic
   belongs_to :user
   
-  scope :publish, where(:publish => true)
-  scope :in_topic, lambda { |post| where("topic_id = ?", @topic.id) }
+  scope :published, where(:publish => true)
+  scope :published_or_belongs_to, lambda { |user| where('publish = true OR user_id = ?', user.id) }
+  scope :in_topic, lambda { |topic| where("topic_id = ?", topic.id) }
+  scope :by_created, order('created_at ASC')
+  scope :by_updated, order('updated_at DESC')
+  scope :ordered, order('created_at ASC, updated_at DESC')
   
   def edited?
     !created_at == updated_at

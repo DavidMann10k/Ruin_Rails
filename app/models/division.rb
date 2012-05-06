@@ -6,6 +6,8 @@ class Division < ActiveRecord::Base
   validates :dex, :presence => true, :numericality => { :only_integer => true }
   validates :title, :presence => true,
                     :length => { :maximum => 100 }
+                    
+  scope :by_dex, order('dex ASC')
   
   def swap_dex_with(div)
     div.dex, self.dex = self.dex, div.dex

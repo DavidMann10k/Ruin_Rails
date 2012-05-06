@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   
   def index
     @title = "users"
-    @users = User.order('name asc')
+    @users = User.by_name
   end
   
   def new
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = User.find(params[:id]).name
-    @availabilities = Availability.where('user_id = ?', @user.id).order("begin ASC")
+    @availabilities = Availability.for_user(@user).by_begin
   end
   
   def promote

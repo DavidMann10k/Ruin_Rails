@@ -29,8 +29,9 @@ class ForumsController < ApplicationController
   end
 
   def show
-    f = Forum.find(params[:id])
-    @forum = Forum.find(params[:id]) if user_has_clearance?(f.division.read_level)
+    @forum = Forum.find(params[:id])
+    redirect_to divisinos_path unless user_has_clearance?(@forum.division.read_level)
+    @topics = @forum.topics.by_updated
     @title = "#{@forum.division.title}/#{@forum.title}"
   end
 

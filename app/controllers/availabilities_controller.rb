@@ -3,7 +3,7 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities.json
   def index
     @title = "availabilities"
-    @availabilities = Availability.order("begin asc")
+    @availabilities = Availability.by_begin
     
     date = DateTime.now.in_time_zone(time_zone)
     date = date.change(:year => 2012, :month => 4, :day => 1, :hour => 0, :minute => 0, :second => 0, :zone => time_zone)

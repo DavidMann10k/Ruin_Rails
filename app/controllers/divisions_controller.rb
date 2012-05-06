@@ -4,7 +4,7 @@ class DivisionsController < ApplicationController
   before_filter :admin_auth, :only => [ :new, :create, :edit, :update, :destroy, :dex_up ]
   
   def index
-    @divisions = Division.order("dex ASC").all.select { |d| user_has_clearance?(d.read_level) }
+    @divisions = Division.by_dex.select { |d| user_has_clearance?(d.read_level) }
     @title = "Divisions"
   end
 

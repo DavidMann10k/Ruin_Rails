@@ -12,4 +12,5 @@ class Topic < ActiveRecord::Base
                       :presence => true
   validates :title, :length => { :maximum => 50 },
                     :presence => true
+  scope :by_updated, order("updated_at DESC")
 end
