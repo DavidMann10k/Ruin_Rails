@@ -1,5 +1,5 @@
 # Ruin Rails: 
-###Gaming community communication portal.
+### Gaming community communication portal.
 
 This project is an exploration into how a traditional message board can be adapted to serve a gaming community.
 
